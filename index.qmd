@@ -15,11 +15,9 @@ Advanced spatial analysis and data science for urban planning and public policy.
 - **Final Project:** Capstone modeling challenge
 
 ## About Me
-Shaurya Chauhan, MCP 1st Year, Architect with 5 years of professional experience in the urban development space
-Email: shaurya.chauhan.arc@gmail.com
-Username: Shaurya-Chauhan
-Why: Interested in the urban innovation space. Coding is thus a skill I'm interested in learning now- ideally at the intersection betwen tech and urban development, which this course allows.
+Shaurya Chauhan, MCP 1st Year, Architect with 5 years of professional experience in the urban development space.
+I am interested in the urban innovation space. Coding is thus a skill I'm interested in learning now- ideally at the intersection between tech and urban development, which this course allows.
 
 ## Contact
-- Email: [your.email@upenn.edu]
-- GitHub: [@your-username]
+- Email: sholly31@upenn.edu
+- GitHub: @Shaurya-Chauhan
