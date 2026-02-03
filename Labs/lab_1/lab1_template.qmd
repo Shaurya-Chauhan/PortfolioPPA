@@ -18,7 +18,7 @@ execute:
 
 ## Scenario
 
-You are a data analyst for the **[Your State] Department of Human Services**. The department is considering implementing an algorithmic system to identify communities that should receive priority for social service funding and outreach programs. Your supervisor has asked you to evaluate the quality and reliability of available census data to inform this decision.
+You are a data analyst for the **California Department of Human Services**. The department is considering implementing an algorithmic system to identify communities that should receive priority for social service funding and outreach programs. Your supervisor has asked you to evaluate the quality and reliability of available census data to inform this decision.
 
 Drawing on our Week 2 discussion of algorithmic bias, you need to assess not just what the data shows, but how reliable it is and what communities might be affected by data quality issues.
 
@@ -56,7 +56,6 @@ library(tidycensus)
 library(tidyverse)
 library(knitr)
 
-
 # Set your Census API key
 
 # Choose your state for analysis - assign it to a variable called my_state
@@ -82,7 +81,6 @@ my_state <- 'California'
 
 ```{r county-data}
 
-glimpse(ca_data$NAME)
 
 # Write your get_acs() code here
 ca_data <- get_acs(
@@ -163,20 +161,20 @@ high_uncertainty <- ca_reliability %>%
   filter(moe_percentage > 8) %>%
   arrange(desc(moe_percentage)) %>%
   slice_head(n = 5) %>%
-  select(county_name, hshld_incomeE, moe_percentage)
+  select(county_name, hshld_incomeE, moe_percentage, hshld_incomeM, reliability)
 
 glimpse(high_uncertainty)
 
 # Format as table with kable() - include appropriate column names and caption
 kable(high_uncertainty,
-      col.names = c("County", "Household Income", "MOE %"),
+      col.names = c("County", "Household Income", "MOE %", "MOE", "Reliability Category"),
       caption = "Counties with Highest Income Data Uncertainty",
       format.args = list(big.mark = ","))
 ```
 
 **Data Quality Commentary:**
 
-[Write 2-3 sentences explaining what these results mean for algorithmic decision-making. Consider: Which counties might be poorly served by algorithms that rely on this income data? What factors might contribute to higher uncertainty?]
+Margin of Error is high so Reliability is low. Therefore, decision making for authorities becomes challenging as this data does not have enough specificity for policy makers to be able to make specific decisions. Thos higher uncertainty might be related to adjustments made to account for households that didnt respond or since the data is representative, weighting is done for the data which might compound any variations in data
 
 # Part 3: Neighborhood-Level Analysis
 
@@ -189,12 +187,19 @@ kable(high_uncertainty,
 ```{r select-counties}
 # Use filter() to select 2-3 counties from your county_reliability data
 # Store the selected counties in a variable called selected_counties
+selected_counties <- ca_reliability %>%
+  group_by(reliability) %>%
+  slice_sample(n = 1) %>%
+  ungroup()
+
 
 # Display the selected counties with their key characteristics
 # Show: county name, median income, MOE percentage, reliability category
+selected_counties %>%
+  select(county_name, hshld_incomeE, moe_percentage, reliability)
 ```
 
-**Comment on the output:** [write something :)]
+**Comment on the output:** The population estimate for these counties is directly proportional to the reliability. Higher population county i.e. Santa Clara also has the most reliability while ALpine has the lowest population estimate number and also has least reliable household income data.
 
 ## 3.2 Tract-Level Demographics
 
@@ -212,11 +217,38 @@ kable(high_uncertainty,
 
 # Use get_acs() to retrieve tract-level data
 # Hint: You may need to specify county codes in the county parameter
+ca_tract_data <- get_acs(
+  geography = "tract",
+  variables = c(
+    white_pop = "B03002_003",
+    black_pop = "B03002_004",
+    latino_pop = "B03002_012",
+    total_pop = "B03002_001"
+  ),
+  state = "CA",
+  year = 2022,
+  output = "wide"
+)
+
+ca_tract_clean <- ca_tract_data %>%
+  mutate(
+    tract_name = str_replace(NAME, "; California$", "")
+  )
 
 # Calculate percentage of each group using mutate()
 # Create percentages for white, Black, and Hispanic populations
+tract_pop_percentages <- ca_tract_clean %>%
+  mutate(
+    pct_white    = round((white_popE / total_popE) * 100, 1),
+    pct_black    = round((black_popE / total_popE) * 100, 1),
+    pct_hispanic = round((latino_popE / total_popE) * 100, 1)
+  )
 
 # Add readable tract and county name columns using str_extract() or similar
+tract_pop_percentages <- tract_pop_percentages %>%
+  separate(NAME, 
+           into = c("tract_name", "county_name", "state_name"), 
+           sep = "; ")
 ```
 
 ## 3.3 Demographic Analysis
@@ -226,11 +258,30 @@ kable(high_uncertainty,
 ```{r demographic-analysis}
 # Find the tract with the highest percentage of Hispanic/Latino residents
 # Hint: use arrange() and slice() to get the top tract
+highest_latino_pct <- tract_pop_percentages %>%
+  arrange(desc(pct_hispanic)) %>%
+  slice_head(n = 1)
 
 # Calculate average demographics by county using group_by() and summarize()
 # Show: number of tracts, average percentage for each racial/ethnic group
+ county_averages <- tract_pop_percentages %>%
+  group_by(county_name) %>%
+  summarize(
+    avg_white = round(mean(pct_white, na.rm = TRUE), 1),
+    avg_black = round(mean(pct_black, na.rm = TRUE), 1),
+    avg_hispanic = round(mean(pct_hispanic, na.rm = TRUE), 1),
+    total_tracts = n() # Bonus: see how many tracts are in each county
+  ) %>%
+  ungroup()
 
 # Create a nicely formatted table of your results using kable()
+library(kableExtra)
+ county_averages %>%
+  kable(
+    col.names = c("County", "% White", "% Black", "% Hispanic", "Total Tracts"),
+    caption = "Average Demographics by County",
+    align = "lrrr"
+  )
 ```
 
 # Part 4: Comprehensive Data Quality Evaluation
@@ -247,11 +298,45 @@ kable(high_uncertainty,
 ```{r demographic-moe}
 # Calculate MOE percentages for white, Black, and Hispanic variables
 # Hint: use the same formula as before (margin/estimate * 100)
+MOE_demographic <- tract_pop_percentages %>%
+  mutate(
+    moe_percentage_white = round((white_popM / white_popE) * 100, 2),
+    moe_percentage_black = round((black_popM / black_popE) * 100, 2),
+    moe_percentage_latino = round((latino_popM / latino_popE) * 100, 2),
+    moe_percentage_popln_total = round((total_popM / total_popE) * 100, 2),
+    
+    reliability = case_when(
+      moe_percentage_popln_total < 5 ~ "High Confidence",
+      moe_percentage_popln_total >= 5 & moe_percentage_popln_total <= 12 ~ "Moderate Confidence",
+      moe_percentage_popln_total > 12 ~ "Low Confidence",
+      TRUE ~ "No Data"
+    )
+  )
+
+
 
 # Create a flag for tracts with high MOE on any demographic variable
 # Use logical operators (| for OR) in an ifelse() statement
+MOE_demographic <- MOE_demographic %>%
+  mutate(
+    high_moe_flag = case_when(
+      # Handle cases where population is zero (prevents 100% unreliability)
+      (white_popE == 0 & black_popE == 0 & latino_popE == 0) ~ "No Population",
+      
+      # The strict "OR" logic based on your assigned cutoffs
+      (moe_percentage_white > 12 | 
+       moe_percentage_black > 12 | 
+       moe_percentage_latino > 12) ~ "Unreliable Demographics",
+      
+      # If it passes both above, it's reliable
+      TRUE ~ "Reliable Demographics"
+    )
+  )
 
 # Create summary statistics showing how many tracts have data quality issues
+quality_summary <- MOE_demographic %>%
+  count(high_moe_flag) %>%
+  mutate(percentage = round((n / sum(n)) * 100, 1))
 ```
 
 ## 4.2 Pattern Analysis
@@ -262,12 +347,36 @@ kable(high_uncertainty,
 # Group tracts by whether they have high MOE issues
 # Calculate average characteristics for each group:
 # - population size, demographic percentages
+data_quality_pattern <- MOE_demographic %>%
+  group_by(high_moe_flag) %>%
+  summarize(
+    count = n(),
+    avg_total_pop = mean(total_popE, na.rm = TRUE),
+    avg_white_pct = mean(pct_white, na.rm = TRUE),
+    avg_black_pct = mean(pct_black, na.rm = TRUE),
+    avg_latino_pct = mean(pct_hispanic, na.rm = TRUE)
+  ) %>%
+  mutate(across(where(is.numeric), round, 1))
 
 # Use group_by() and summarize() to create this comparison
 # Create a professional table showing the patterns
+pattern_table <- data.frame(
+  `Quality Status` = c("Unreliable Demographics", "No Population"),
+  `Avg Population` = c(4334, 2.6),
+  `Pct White` = c(38.0, 0),
+  `Pct Latino` = c(38.0, 0),
+  `Pct Black`  = c(5.3, 0)
+)
+
+kable(
+  pattern_table, 
+  caption = "Characteristics of Tracts with Data Quality Issues",
+  align = "lrrrr",
+  col.names = c("Quality Status", "Avg Population", "% White", "% Latino", "% Black")
+)
 ```
 
-**Pattern Analysis:** [Describe any patterns you observe. Do certain types of communities have less reliable data? What might explain this?]
+**Pattern Analysis:** Data quality issues are mostly found in smaller neighborhoods where fewer people live- making the Census counts less certain. A major pattern is that when a specific group- like the Black population in this data- makes up a very small slice of the neighborhood (around 5.3%), the margin of error jumps too high to meet strict standards. We also see tracts with almost no people- which are likely parks or industrial areas rather than actual residential communities. This shows that it is very hard to get highly reliable data in places that are either sparsely populated or have very small numbers of a specific demographic group.
 
 
 # Part 5: Policy Recommendations
@@ -284,7 +393,14 @@ kable(high_uncertainty,
 
 **Executive Summary:**
 
-[Your integrated 4-paragraph summary here]
+Across California, data reliability is following a clear systematic patter- accuracy is directly tied to population density and demographic concentration. At the county level, high-population hubs like Santa Clara exhibit high confidence while smaller rural areas like Alpine County show significant uncertainty in household income data. This pattern is even more pronounced at the tract level where neighborhoods with smaller total populations or very small distributions of specific demographic groups frequently fail to meet our reliability standards. Hence, the further the analysis zooms in into small sub-populations- the noisier and less reliable the census estimates become.
+
+These findings present a significant equity risk- communities with the highest data uncertainty often face the greatest risk of algorithmic bias. Specifically, neighborhoods where the Black population makes up a small percentage (around 5.3% black in "unreliable" tracts) are disproportionately flagged as having low-confidence data. If an algorithmic system is used to prioritize social funding based on these metrics- these communities may be unfairly excluded or misrepresented. Under-represented or sparsely populated groups are almost hidden by high margins of error- which could lead to a systematic denial of resources to those who need them most.
+
+The root cause of this reliability gap is sampling variability within the American Community Survey. Because the ACS is a sample rather than a full count- the margin of error increases as the sample size decreases. In tracts with lower residential density or areas with very small numbers of specific demographic groups, the noise in the data often exceeds our 12% reliability threshold. Also, almost 0 population tracts in non-residential industrial zones or parks can seemingly create mathematical errors that can further skew algorithm's results.
+
+To address these systematic issues- a tiered decision-making framework could perhaps be used. Algorithmic systems should only be used for immediate implementation in "High Confidence" counties where margins of error are below 5%. For "Moderate Confidence" areas, the Department could implement outcome monitoring to catch any potential biases. Finally, "Low Confidence" tracts or county must require a manual review or use proxy data sources —such as school enrollment or state tax records—before making any significant decisions.
+
 
 ## 6.3 Specific Recommendations
 
@@ -299,39 +415,73 @@ kable(high_uncertainty,
 # - Moderate Confidence: "Use with caution - monitor outcomes"  
 # - Low Confidence: "Requires manual review or additional data"
 
+county_recommendations <- ca_reliability %>%
+  mutate(
+    # Creating the decision framework
+    algorithm_recommendation = case_when(
+      reliability == "High Confidence" ~ "Safe for algorithmic decisions",
+      reliability == "Moderate" ~ "Use with caution - monitor outcomes",
+      reliability == "Low Confidence" ~ "Requires manual review or additional data",
+      TRUE ~ "Data unavailable"
+    )
+  ) %>%
+  # Selecting and renaming columns for the final table
+  select(
+    `County` = county_name,
+    `Median Income` = hshld_incomeE,
+    `MOE %` = moe_percentage,
+    `Reliability Category` = reliability,
+    `Recommendation` = algorithm_recommendation
+  ) %>%
+  # Sorting by MOE % to show most reliable data first
+  arrange(`MOE %`)
+
+
+
 # Format as a professional table with kable()
+kable(
+  county_recommendations,
+  caption = "County-Level Algorithmic Implementation Framework",
+  format.args = list(big.mark = ","),
+  align = "lrrll"
+)
+
 ```
 
 **Key Recommendations:**
 
 **Your Task:** Use your analysis results to provide specific guidance to the department.
 
-1. **Counties suitable for immediate algorithmic implementation:** [List counties with high confidence data and explain why they're appropriate]
+1. **Counties suitable for immediate algorithmic implementation:** Counties: Santa Clara, Los Angeles, Sacramento, etc. 
+Why: These counties feature high population estimates, which correlate directly with higher data reliability and low Margins of Error (MOE < 5%). Their large sample sizes ensure that algorithmic decisions are based on stable, statistically significant data points, minimizing the risk.
 
-2. **Counties requiring additional oversight:** [List counties with moderate confidence data and describe what kind of monitoring would be needed]
+2. **Counties requiring additional oversight:** Counties: Calaveras, San Benito, Lassen, etc. 
+Monitoring Needed: For these areas, the department should implement outcome monitoring- regularly auditing the algorithm's decisions against real-world feedback to ensure that minor data fluctuations aren't causing systematic biases.
 
-3. **Counties needing alternative approaches:** [List counties with low confidence data and suggest specific alternatives - manual review, additional surveys, etc.]
+3. **Counties needing alternative approaches:** Counties: Plumas, Trinity, Sierra, etc.
+Because these areas often have small or sparsely distributed populations, the department should rely on manual review or supplemental data (such as local administrative records). Relying solely on a census-based algorithm here would likely lead to bias due to the high noise in the estimates.
 
 ## Questions for Further Investigation
 
-[List 2-3 questions that your analysis raised that you'd like to explore further in future assignments. Consider questions about spatial patterns, time trends, or other demographic factors.]
+1. Spatial Correlation of Unreliability: Is there a geographic pattern to data unreliability? For e.g. are rural "border" tracts consistently more difficult to count than urban centers- regardless of the total population size?
+2. Impact of Time on Minority Margin of Error: How have the Margins of Error for small demographic subgroups (like the 5.3% Black population observed) changed over the last three ACS 5-year cycles? Is it becoming more or less reliable with time for such vulnerable groups?
 
 # Technical Notes
 
 **Data Sources:** 
 - U.S. Census Bureau, American Community Survey 2018-2022 5-Year Estimates
-- Retrieved via tidycensus R package on [date]
+- Retrieved via tidycensus R package on 3/2/26
 
 **Reproducibility:** 
-- All analysis conducted in R version [your version]
+- All analysis conducted in R version 4.5.1
 - Census API key required for replication
-- Complete code and documentation available at: [your portfolio URL]
+- Complete code and documentation available at: https://shaurya-chauhan.github.io/PortfolioPPA/
 
 **Methodology Notes:**
-[Describe any decisions you made about data processing, county selection, or analytical choices that might affect reproducibility]
+This analysis used 2022 ACS 5-year estimates via the tidycensus package, focusing on California's county and tract-level data. To ensure reproducibility, I selected counties representing high, moderate, and low confidence levels to observe how population size impacts data stability. A strict 12% Margin of Error (MOE) threshold was applied to demographic variables- to flag unreliable data. I specifically used case_when logic to separate "No Population" tracts from "Unreliable" ones, ensuring that mathematical errors in empty tracts did not skew the quality assessment. These analytical choices highlight that while strict standards are useful for policy, they frequently label smaller sub-populations.
 
 **Limitations:**
-[Note any limitations in your analysis - sample size issues, geographic scope, temporal factors, etc.]
+The primary limitation of this analysis is the reliance on a strict 12% Margin of Error threshold for demographic variables at the tract level. While this ensures high data quality- it tends to disproportionately flag smaller minority populations as "unreliable" potentially masking the needs of those specific groups in policy decisions. Temporally, since the study utilizes 2022 ACS 5-year estimates, which provide a stable average over time but may not capture rapid recent shifts in local conditions.
 
 ---
 
