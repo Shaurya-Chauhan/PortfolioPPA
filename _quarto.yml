@@ -9,6 +9,11 @@ website:
       - href: index.qmd
         text: Home
 
+- text: Assignments
+  menu:
+    - href: labs/lab_1/your_file_name.qmd
+      text: "Lab 1: Census Data Exploration"
+
 format:
   html:
     theme: cosmo
