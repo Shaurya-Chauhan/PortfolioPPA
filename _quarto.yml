@@ -9,10 +9,13 @@ website:
       - href: index.qmd
         text: Home
 
-- text: Assignments
-  menu:
-    - href: labs/lab_1/your_file_name.qmd
-      text: "Lab 1: Census Data Exploration"
+      - text: Labs
+        menu:
+          - href: Labs/Lab0/lab0_template.qmd
+            text: "Lab 0: dplyr Basics"
+
+          - href: Labs/lab_1/lab1_template.qmd
+            text: "Lab 1: Census Data Exploration"
 
 format:
   html:
@@ -22,3 +25,6 @@ format:
 
 execute:
   freeze: auto
+
+
+
