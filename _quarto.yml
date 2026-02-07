@@ -11,10 +11,9 @@ website:
 
       - text: Labs
         menu:
-          - href: Labs/Lab0/lab0_template.qmd
+          - href: labs/lab_0/
             text: "Lab 0: dplyr Basics"
-
-          - href: Labs/lab_1/lab1_template.qmd
+          - href: labs/lab_1/
             text: "Lab 1: Census Data Exploration"
 
 format:
@@ -25,6 +24,11 @@ format:
 
 execute:
   freeze: auto
+
+render:
+  - index.qmd
+  - labs/**/index.qmd
+
 
 
 
