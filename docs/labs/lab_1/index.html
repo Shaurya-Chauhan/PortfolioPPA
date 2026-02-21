@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shaurya Chauhan">
-<meta name="dcterms.date" content="2026-02-07">
+<meta name="dcterms.date" content="2026-02-21">
 
 <title>Lab 1: Census Data Quality for Policy Decisions – Shaurya Chauhan - MUSA 5080 Portfolio</title>
 <style>
@@ -143,6 +143,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../labs/lab_1/">
  <span class="dropdown-text">Lab 1: Census Data Exploration</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs/lab_2/">
+ <span class="dropdown-text">Lab 2: Spatial Analysis and Visualization</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -225,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 7, 2026</p>
+      <p class="date">February 21, 2026</p>
     </div>
   </div>
   
@@ -464,9 +468,9 @@ $ reliability    &lt;chr&gt; "Low Confidence", "Low Confidence", "Low Confidence
 <pre><code># A tibble: 3 × 4
   county_name hshld_incomeE moe_percentage reliability    
   &lt;chr&gt;               &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;          
-1 Los Angeles         83411           0.53 High Confidence
+1 Butte               66085           3.42 High Confidence
 2 Plumas              67885          11.4  Low Confidence 
-3 Modoc               54962           9.8  Moderate       </code></pre>
+3 San Benito         104451           5.23 Moderate       </code></pre>
 </div>
 </div>
 <p><strong>Comment on the output:</strong> The population estimate for these counties is directly proportional to the reliability. Higher population county i.e.&nbsp;Santa Clara also has the most reliability while ALpine has the lowest population estimate number and also has least reliable household income data.</p>
