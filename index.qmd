@@ -15,8 +15,9 @@ Advanced spatial analysis and data science for urban planning and public policy.
 - **Final Project:** Capstone modeling challenge
 
 ## About Me
-Shaurya Chauhan, MCP 1st Year, Architect with 5 years of professional experience in the urban development space.
-I am interested in the urban innovation space. Coding is thus a skill I'm interested in learning now- ideally at the intersection between tech and urban development- as well as its policy and ethical implications- which this course enables.
+I am Shaurya Chauhan, a Masters in City Planning candidate at University of Pennsylvania and an Architect with 5 years of professional experience in the urban development space.
+I am currently pursuing my interest in the urban innovation space. Spatial Data Anayltics is thus a skill I'm polishing now- ideally at the intersection between tech and urban development- as well as its policy and ethical implications. This portfolio is my collected work in these forays. 
+I am always open to collaborative projects in this space. Please find my contact details below.
 
 ## Contact
 - Email: sholly31@upenn.edu
