@@ -11,13 +11,13 @@ website:
 
       - text: Labs
         menu:
-          - href: labs/lab_0/
+          - href: labs/lab_0/index.qmd
             text: "Lab 0: dplyr Basics"
-          - href: labs/lab_1/
+          - href: labs/lab_1/index.qmd
             text: "Lab 1: Census Data Exploration"
-          - href: labs/lab_2/
+          - href: labs/lab_2/index.qmd
             text: "Lab 2: Spatial Analysis and Visualization"
-          - href: labs/lab_4/
+          - href: labs/lab_4/index.qmd
             text: "Lab 4: Spatial Predictive Analysis"            
 
 format:
