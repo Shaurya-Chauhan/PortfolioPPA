@@ -1,0 +1,471 @@
+---
+title: "Lab 4: Spatial Predictive Analysis"
+subtitle: "Analyzing 311 Violations"
+author: "Shaurya Chauhan"
+date: today
+format: 
+  html:
+    code-fold: false
+    toc: true
+    toc-location: left
+    theme: cosmo
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+---
+
+
+
+## Overview
+
+This analysis builds a spatial predictive model of burglary incidents in Chicago using neighborhood-level indicators of urban disorder. 
+
+The primary predictor used in this study is 311 garbage cart complaints, which serve as a proxy for neighborhood maintenance and disorder. Prior research suggests that visible signs of neglect may be associated with higher crime risk by reducing informal social control.
+
+The objective is to evaluate whether incorporating spatial features derived from garbage complaints improves the prediction of burglary incidents compared to simple spatial smoothing methods such as kernel density estimation (KDE).
+
+
+```{r setup}
+#| message: false
+#| warning: false
+
+# Load required packages
+library(tidyverse)
+library(sf)
+library(here)
+library(viridis)
+library(terra)
+library(spdep)
+library(FNN)
+library(MASS)
+library(patchwork)
+library(knitr)
+library(kableExtra)
+library(classInt)
+
+library(spatstat.geom)
+library(spatstat.explore)
+
+options(scipen = 999)
+set.seed(5080)
+
+theme_crime <- function(base_size = 11) {
+  theme_minimal(base_size = base_size) +
+    theme(
+      plot.title = element_text(face = "bold", size = base_size + 1),
+      plot.subtitle = element_text(color = "gray30", size = base_size - 1),
+      legend.position = "right",
+      panel.grid.minor = element_blank(),
+      axis.text = element_blank(),
+      axis.title = element_blank()
+    )
+}
+
+theme_set(theme_crime())
+
+cat("✓ All packages loaded successfully!\n")
+cat("✓ Working directory:", getwd(), "\n")
+```
+
+
+## Exercise 1.1: Load Chicago Spatial Data
+
+```{r load-boundaries}
+#| message: false
+
+# Load police districts (used for spatial cross-validation)
+policeDistricts <- 
+  st_read("https://data.cityofchicago.org/api/geospatial/24zt-jpfn?method=export&format=GeoJSON") %>%
+  st_transform('ESRI:102271') %>%
+  dplyr::select(District = dist_num)
+
+# Load police beats (smaller administrative units)
+policeBeats <- 
+  st_read("https://data.cityofchicago.org/api/geospatial/n9it-hstw?method=export&format=GeoJSON") %>%
+  st_transform('ESRI:102271') %>%
+  dplyr::select(Beat = beat_num)
+
+# Load Chicago boundary
+chicagoBoundary <- 
+  st_read("https://raw.githubusercontent.com/urbanSpatial/Public-Policy-Analytics-Landing/master/DATA/Chapter5/chicagoBoundary.geojson") %>%
+  st_transform('ESRI:102271')
+
+cat("✓ Loaded spatial boundaries\n")
+cat("  - Police districts:", nrow(policeDistricts), "\n")
+cat("  - Police beats:", nrow(policeBeats), "\n")
+```
+
+The analysis begins by loading key spatial boundary datasets for Chicago, 
+including police districts, police beats, and the city boundary. These 
+geographies provide the spatial framework for the analysis.
+
+Police districts are particularly important because they are used for spatial 
+cross-validation, allowing the model to be evaluated on unseen geographic areas.
+
+All datasets are transformed to a common coordinate reference system 
+(ESRI:102271) to ensure consistency in spatial operations.
+
+
+## Exercise 1.2: Load Burglary Data
+
+```{r load-burglaries}
+#| message: false
+
+burglaries <- st_read(here("data", "burglaries.shp")) %>% 
+  st_transform('ESRI:102271')
+
+glimpse(burglaries)
+
+cat("\n✓ Loaded burglary data\n")
+cat("  - Number of burglaries:", nrow(burglaries), "\n")
+cat("  - CRS:", st_crs(burglaries)$input, "\n")
+```
+
+The dataset contains burglary incidents across Chicago for 2017. The data is 
+stored as a spatial point dataset and transformed into the ESRI:102271 
+coordinate system to enable accurate distance-based analysis.
+
+
+## Exercise 1.3: Visualize Crime Patterns
+
+```{r visualize-burglaries}
+#| fig-width: 10
+#| fig-height: 5
+
+p1 <- ggplot() + 
+  geom_sf(data = chicagoBoundary, fill = "gray95", color = "gray60") +
+  geom_sf(data = burglaries, color = "#d62828", size = 0.1, alpha = 0.4) +
+  labs(
+    title = "Burglary Locations",
+    subtitle = paste0("Chicago 2017, n = ", nrow(burglaries))
+  )
+
+p2 <- ggplot() + 
+  geom_sf(data = chicagoBoundary, fill = "gray95", color = "gray60") +
+  geom_density_2d_filled(
+    data = data.frame(st_coordinates(burglaries)),
+    aes(X, Y),
+    alpha = 0.7,
+    bins = 8
+  ) +
+  scale_fill_viridis_d(option = "plasma", direction = -1) +
+  labs(
+    title = "Burglary Density Surface",
+    subtitle = "Kernel density estimation"
+  )
+
+p1 + p2
+```
+Burglary incidents are spatially clustered rather than randomly distributed 
+across Chicago- especially around the south-eastern and central Chicago areas. The density map reveals concentrated hotspots of crime, 
+indicating that these neighborhoods experience significantly higher levels 
+of burglary.
+
+This clustering suggests that spatial features and neighborhood conditions 
+play a critical role in explaining crime patterns, making spatial modeling 
+essential for prediction.
+
+
+## Exercise 2.1: Create Spatial Analysis Grid
+
+```{r create-fishnet}
+
+fishnet <- st_make_grid(
+  chicagoBoundary,
+  cellsize = 1000,
+  square = TRUE
+) %>%
+  st_as_sf() %>%
+  st_intersection(chicagoBoundary)
+
+fishnet$grid_id <- 1:nrow(fishnet)
+
+nrow(fishnet)
+```
+
+A regular grid (fishnet) is created to aggregate crime data into spatial units. 
+Each grid cell represents a 1000-foot square area, allowing crime counts and 
+other features to be measured consistently across space.
+
+This approach converts point-level data into area-based observations, which 
+are required for regression modeling.
+
+
+## Exercise 2.2: Aggregate Crime Counts
+
+```{r crime-counts}
+
+fishnet$crime_count <- lengths(
+  st_intersects(fishnet, burglaries)
+)
+
+summary(fishnet$crime_count)
+```
+
+Crime counts are calculated for each grid cell by counting the number of 
+burglary incidents that fall within each spatial unit. This creates the 
+dependent variable for the regression model.
+
+The distribution of crime counts is typically skewed, with many cells 
+having low counts and a smaller number of cells experiencing high crime.
+
+
+## Exercise 3.1: Load Garbage Cart Data
+
+```{r load-garbage}
+#| message: false
+
+garbage_raw <- read_csv(here("data", "Chicago_GarbageCarts.csv"))
+
+# Remove rows with missing coordinates
+garbage_clean <- garbage_raw %>%
+  drop_na(Longitude, Latitude)
+
+# Convert to sf
+garbage <- garbage_clean %>%
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
+  st_transform('ESRI:102271')
+
+cat("✓ Garbage data loaded\n")
+cat("  - Original rows:", nrow(garbage_raw), "\n")
+cat("  - After cleaning:", nrow(garbage), "\n")
+```
+
+Garbage cart locations are incorporated as an additional spatial feature. 
+The dataset is converted into a spatial format and projected into the same 
+coordinate system as the rest of the analysis.
+
+This variable serves as a proxy for neighborhood conditions and municipal 
+service patterns, which may be associated with crime levels.
+
+
+## Exercise 3.2: Aggregate Garbage Carts to Grid
+
+```{r garbage-counts}
+
+fishnet$garbage_count <- lengths(
+  st_intersects(fishnet, garbage)
+)
+
+summary(fishnet$garbage_count)
+```
+
+Garbage cart counts are calculated for each grid cell to capture the spatial 
+distribution of waste management infrastructure.
+
+Areas with higher concentrations of garbage carts may reflect higher population 
+density or different neighborhood characteristics, which could influence crime patterns.
+
+
+## Exercise 3.3: Create Spatial Features
+
+```{r spatial-features}
+
+# Get coordinates of grid centroids
+coords <- st_coordinates(st_centroid(fishnet))
+
+# Use knearneigh (spdep-compatible)
+knn_obj <- knearneigh(coords, k = 4)
+
+# Convert to neighbors list
+neighbors <- knn2nb(knn_obj)
+
+# Create spatial weights
+weights <- nb2listw(neighbors, style = "W")
+
+# Spatial lag of crime
+fishnet$crime_lag <- lag.listw(weights, fishnet$crime_count)
+
+summary(fishnet$crime_lag)
+```
+
+Spatial features are created to capture spatial dependence in crime patterns. 
+Nearest neighbor distances measure how close each grid cell is to others, while 
+spatial lag captures the average crime levels in neighboring cells.
+
+These features allow the model to account for spatial autocorrelation, where 
+crime in one area is influenced by crime in nearby areas.
+
+
+## Exercise 3.4: Attach Police Districts
+
+```{r attach-districts}
+
+fishnet <- st_join(fishnet, policeDistricts)
+
+table(fishnet$District)
+```
+
+Police district identifiers are attached to each grid cell. These are later 
+used for spatial cross-validation, ensuring that model evaluation is performed 
+across distinct geographic areas rather than random splits.
+
+
+## Exercise 4.1: Negative Binomial Model
+
+```{r nb-model}
+
+nb_model <- glm.nb(
+  crime_count ~ garbage_count + crime_lag,
+  data = fishnet
+)
+
+summary(nb_model)
+```
+
+
+A Negative Binomial regression model is used to predict burglary counts. This 
+model is appropriate because crime data are count-based and typically exhibit 
+overdispersion, where the variance exceeds the mean.
+
+The model includes garbage cart density and spatial lag of crime. Garbage carts 
+serve as a proxy for neighborhood conditions and service patterns, while the 
+spatial lag captures the influence of nearby areas. Together, these variables 
+allow the model to account for both environmental and spatial drivers of crime.
+
+The Negative Binomial regression results indicate that both garbage cart density 
+and spatial lag are statistically significant predictors of burglary counts.
+
+The coefficient for **garbage_count (0.00497, p < 0.001)** is positive and highly 
+significant, suggesting that areas with more garbage carts tend to experience 
+slightly higher burglary counts. While the magnitude is modest, this variable 
+likely captures underlying neighborhood characteristics such as density or 
+activity levels rather than a direct causal relationship.
+
+The coefficient for **crime_lag (0.0756, p < 0.001)** is substantially larger and 
+also highly significant. This indicates strong spatial dependence, meaning that 
+crime in a given location is heavily influenced by crime levels in neighboring 
+areas. This is consistent with well-established patterns of crime clustering in 
+urban environments.
+
+
+
+## Exercise 4.2: Model Predictions
+
+```{r predictions}
+
+fishnet$predicted <- predict(nb_model, type = "response")
+
+summary(fishnet$predicted)
+```
+
+
+
+## Exercise 4.3: Predicted Crime Map
+
+```{r prediction-map}
+
+ggplot() +
+  geom_sf(data = fishnet, aes(fill = predicted), color = NA) +
+  scale_fill_viridis_c(option = "plasma") +
+  labs(
+    title = "Predicted Burglary Counts",
+    fill = "Predicted"
+  )
+```
+
+
+The predicted burglary map reveals clear spatial clustering of crime across 
+Chicago. High predicted values are concentrated in specific hotspot areas, 
+particularly in central and southern regions, indicating that the model is 
+successfully identifying areas with elevated crime risk.
+
+The model produces a smoother surface compared to raw crime counts, which is 
+expected in regression-based predictions. This smoothing reflects the model’s 
+ability to generalize underlying spatial patterns rather than overfitting to 
+extreme observations.
+
+The alignment between predicted hotspots and known high-crime areas suggests 
+that the model captures key spatial dynamics effectively. In particular, the 
+strong influence of spatial lag contributes to the formation of these clustered 
+prediction patterns.
+
+
+
+## Exercise 4.3: Spatial Cross Validation
+
+```{r spatial-cv}
+
+districts <- unique(fishnet$District)
+
+cv_results <- map_dfr(districts, function(d) {
+  
+  train <- fishnet %>% filter(District != d)
+  test  <- fishnet %>% filter(District == d)
+  
+  model <- glm.nb(
+    crime_count ~ garbage_count + crime_lag,
+    data = train
+  )
+  
+  test$pred <- predict(model, newdata = test, type = "response")
+  
+  tibble(
+    district = d,
+    rmse = sqrt(mean((test$crime_count - test$pred)^2, na.rm = TRUE))
+  )
+})
+
+cv_results
+```
+
+```{r cv-summary}
+
+mean(cv_results$rmse)
+```
+
+Spatial cross-validation using a leave-one-district-out (LOGO) approach produced 
+an average RMSE of approximately **13.11 burglaries per grid cell**.
+
+The RMSE values vary substantially across districts, ranging from as low as 
+approximately **2.3** to over **21**, indicating uneven predictive performance 
+across the city. This variation suggests that the model performs well in some 
+districts but struggles in others, particularly in areas with more complex or 
+volatile crime patterns.
+
+The relatively higher RMSE values compared to what would be expected under random 
+cross-validation highlight the challenge of spatial generalization. When the model 
+is tested on entirely unseen geographic areas, prediction errors increase, 
+demonstrating that crime patterns are highly localized.
+
+Overall, these results emphasize that while the model captures general spatial 
+trends, its ability to transfer across different neighborhoods is limited, 
+reflecting underlying spatial heterogeneity in urban crime dynamics.
+
+
+
+
+## Conclusions
+
+This analysis demonstrates that burglary patterns in Chicago are strongly shaped 
+by spatial dynamics. The results show that crime is not randomly distributed but 
+highly clustered, with nearby areas exerting significant influence on each other.
+
+The Negative Binomial model confirms that **spatial lag is the most important 
+predictor**, highlighting the importance of spatial dependence in crime modeling. 
+Garbage cart density is also statistically significant, suggesting that it 
+captures underlying neighborhood characteristics such as density or activity 
+levels.
+
+The model achieves moderate predictive performance, with an average RMSE of 
+approximately **13 burglaries per grid cell** under spatial cross-validation. 
+However, the variation in RMSE across districts indicates that prediction accuracy 
+is uneven and context-dependent.
+
+These findings underscore two key insights:  
+1. **Incorporating spatial features is essential for accurate crime prediction**  
+2. **Models struggle to generalize across different neighborhoods due to spatial heterogeneity**
+
+From a policy perspective, this suggests that city interventions should be 
+**place-specific rather than one-size-fits-all**, and predictive models should be 
+used alongside local knowledge when allocating resources.
+
+Overall, the analysis demonstrates the value of combining spatial data, 
+neighborhood indicators, and appropriate modeling techniques to better understand 
+and predict urban crime patterns.
+
+
+
+
+
