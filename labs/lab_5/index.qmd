@@ -892,24 +892,20 @@ Further improvements from demographic variables and station fixed effects indica
 
 The final model, which includes engineered features such as good weather, weekly lag, and rolling averages, achieves the lowest MAE (0.42 compared to 0.44 in the previous best model), representing an improvement. This demonstrates that capturing cyclical demand patterns and weather suitability enhances predictive accuracy. The improvement in MAE is most pronounced during high-demand periods, where the weekly lag and rolling average help stabilize predictions. These features reduce error during peak commuting hours, which were previously more difficult to predict.
 
-
-
 ### Comparison with Q1 2025
 
 Comparing results from Q4 2024 to the Q1 2025 baseline highlights both similarities in underlying demand patterns and important seasonal differences in model performance.
 
-**MAE Comparison:**  
+**MAE Comparison:**\
 The best-performing model in Q4 achieves an MAE of approximately 0.42, improving from 0.44 after feature engineering. In the Q1 baseline, model performance also improves with the addition of temporal lags and station fixed effects, but overall errors tend to be slightly lower and more stable. This suggests that demand in Q1 is somewhat easier to predict, likely due to more consistent ridership patterns as conditions transition toward spring.
 
-**Temporal Patterns:**  
+**Temporal Patterns:**\
 Both Q1 and Q4 exhibit strong and consistent commuting peaks during weekday mornings and evenings, reflecting the importance of work-related travel. However, Q4 shows a clearer overall decline in ridership over time and greater variability, as seen in the daily trends and weather patterns. In contrast, Q1 includes more irregular spikes in demand (e.g., event-driven surges such as the February 14 spike noted in the baseline), but overall demand becomes more stable toward the end of the quarter. This indicates that Q4 demand is more weather-sensitive, while Q1 includes both seasonal recovery and event-driven variation.
 
-**Feature Importance:**  
+**Feature Importance:**\
 Across both quarters, temporal lag variables (lag1Hour, lag3Hours, lag1day) are the most important predictors, confirming strong persistence in bike demand. However, in Q4, weather-related variables and engineered features such as the “good weather” indicator play a more significant role, reflecting the stronger impact of temperature and precipitation in colder months. Additionally, the inclusion of weekly lag and rolling average features in Q4 provides noticeable improvements, suggesting that capturing cyclical patterns is especially important when demand is more volatile.
 
 Overall, while the same modeling framework performs well across both quarters, Q4 requires greater reliance on weather and engineered temporal features to achieve similar predictive performance, highlighting the importance of seasonality in bike share demand modeling.
-
-
 
 ## Visualize Model Comparison
 
@@ -1227,7 +1223,6 @@ This raises potential equity concerns. If prediction errors are systematically h
 
 From a policy perspective, deploying such a model without adjustments could reinforce existing disparities in access to shared mobility. Safeguards such as minimum service thresholds or targeted rebalancing strategies may be necessary to ensure equitable outcomes.
 
-
 ## Critical Reflection
 
 From an operational perspective, the final model achieves a relatively low MAE, suggesting it could be useful for informing bike rebalancing strategies. However, prediction errors during peak demand periods remain a concern, as these are the times when accurate forecasts are most critical. Even small errors during rush hours could lead to significant service disruptions.
@@ -1235,7 +1230,6 @@ From an operational perspective, the final model achieves a relatively low MAE, 
 From an equity standpoint, the presence of higher errors in certain neighborhoods raises concerns about uneven service provision. If the model is used to guide resource allocation, it could inadvertently disadvantage areas where predictions are less accurate. Ensuring equitable outcomes would require incorporating fairness considerations, such as prioritizing service reliability in underserved communities.
 
 Finally, the model has several limitations. It does not account for special events, infrastructure differences, or behavioral factors that influence demand. Future improvements could include richer spatial data, event indicators, and more advanced modeling techniques to better capture these dynamics.
-
 
 ### Model Limitations and Future Improvements
 
