@@ -20,7 +20,7 @@ website:
           - href: labs/lab_4/index.qmd
             text: "Lab 4: Spatial Predictive Analysis"            
           - href: labs/lab_5/index.qmd
-            text: "Lab 4: Bikeshare Space-Time Prediction"    
+            text: "Lab 5: Bikeshare Space-Time Prediction"    
             
 format:
   html:
