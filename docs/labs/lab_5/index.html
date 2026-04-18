@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shaurya Chauhan">
-<meta name="dcterms.date" content="2026-04-14">
+<meta name="dcterms.date" content="2026-04-18">
 
 <title>Bikeshare_SpaceTime_Prediction – Shaurya Chauhan - MUSA 5080 Portfolio</title>
 <style>
@@ -4135,6 +4135,10 @@ border: 0;
     <a class="dropdown-item" href="../../labs/lab_4/index.html">
  <span class="dropdown-text">Lab 4: Spatial Predictive Analysis</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../labs/lab_5/index.html">
+ <span class="dropdown-text">Lab 5: Bikeshare Space-Time Prediction</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -4264,7 +4268,7 @@ border: 0;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 14, 2026</p>
+      <p class="date">April 18, 2026</p>
     </div>
   </div>
   
@@ -7579,358 +7583,352 @@ Across both quarters, temporal lag variables (lag1Hour, lag3Hours, lag1day) are 
 <span id="cb88-896"><a href="#cb88-896" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb88-897"><a href="#cb88-897" aria-hidden="true" tabindex="-1"></a>The final model, which includes engineered features such as good weather, weekly lag, and rolling averages, achieves the lowest MAE (0.42 compared to 0.44 in the previous best model), representing an improvement. This demonstrates that capturing cyclical demand patterns and weather suitability enhances predictive accuracy. The improvement in MAE is most pronounced during high-demand periods, where the weekly lag and rolling average help stabilize predictions. These features reduce error during peak commuting hours, which were previously more difficult to predict.</span>
 <span id="cb88-898"><a href="#cb88-898" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-899"><a href="#cb88-899" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-899"><a href="#cb88-899" aria-hidden="true" tabindex="-1"></a><span class="fu">### Comparison with Q1 2025</span></span>
 <span id="cb88-900"><a href="#cb88-900" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-901"><a href="#cb88-901" aria-hidden="true" tabindex="-1"></a><span class="fu">### Comparison with Q1 2025</span></span>
+<span id="cb88-901"><a href="#cb88-901" aria-hidden="true" tabindex="-1"></a>Comparing results from Q4 2024 to the Q1 2025 baseline highlights both similarities in underlying demand patterns and important seasonal differences in model performance.</span>
 <span id="cb88-902"><a href="#cb88-902" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-903"><a href="#cb88-903" aria-hidden="true" tabindex="-1"></a>Comparing results from Q4 2024 to the Q1 2025 baseline highlights both similarities in underlying demand patterns and important seasonal differences in model performance.</span>
-<span id="cb88-904"><a href="#cb88-904" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-905"><a href="#cb88-905" aria-hidden="true" tabindex="-1"></a>**MAE Comparison:**  </span>
-<span id="cb88-906"><a href="#cb88-906" aria-hidden="true" tabindex="-1"></a>The best-performing model in Q4 achieves an MAE of approximately 0.42, improving from 0.44 after feature engineering. In the Q1 baseline, model performance also improves with the addition of temporal lags and station fixed effects, but overall errors tend to be slightly lower and more stable. This suggests that demand in Q1 is somewhat easier to predict, likely due to more consistent ridership patterns as conditions transition toward spring.</span>
-<span id="cb88-907"><a href="#cb88-907" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-908"><a href="#cb88-908" aria-hidden="true" tabindex="-1"></a>**Temporal Patterns:**  </span>
-<span id="cb88-909"><a href="#cb88-909" aria-hidden="true" tabindex="-1"></a>Both Q1 and Q4 exhibit strong and consistent commuting peaks during weekday mornings and evenings, reflecting the importance of work-related travel. However, Q4 shows a clearer overall decline in ridership over time and greater variability, as seen in the daily trends and weather patterns. In contrast, Q1 includes more irregular spikes in demand (e.g., event-driven surges such as the February 14 spike noted in the baseline), but overall demand becomes more stable toward the end of the quarter. This indicates that Q4 demand is more weather-sensitive, while Q1 includes both seasonal recovery and event-driven variation.</span>
-<span id="cb88-910"><a href="#cb88-910" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-911"><a href="#cb88-911" aria-hidden="true" tabindex="-1"></a>**Feature Importance:**  </span>
-<span id="cb88-912"><a href="#cb88-912" aria-hidden="true" tabindex="-1"></a>Across both quarters, temporal lag variables (lag1Hour, lag3Hours, lag1day) are the most important predictors, confirming strong persistence in bike demand. However, in Q4, weather-related variables and engineered features such as the “good weather” indicator play a more significant role, reflecting the stronger impact of temperature and precipitation in colder months. Additionally, the inclusion of weekly lag and rolling average features in Q4 provides noticeable improvements, suggesting that capturing cyclical patterns is especially important when demand is more volatile.</span>
+<span id="cb88-903"><a href="#cb88-903" aria-hidden="true" tabindex="-1"></a>**MAE Comparison:**\</span>
+<span id="cb88-904"><a href="#cb88-904" aria-hidden="true" tabindex="-1"></a>The best-performing model in Q4 achieves an MAE of approximately 0.42, improving from 0.44 after feature engineering. In the Q1 baseline, model performance also improves with the addition of temporal lags and station fixed effects, but overall errors tend to be slightly lower and more stable. This suggests that demand in Q1 is somewhat easier to predict, likely due to more consistent ridership patterns as conditions transition toward spring.</span>
+<span id="cb88-905"><a href="#cb88-905" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-906"><a href="#cb88-906" aria-hidden="true" tabindex="-1"></a>**Temporal Patterns:**\</span>
+<span id="cb88-907"><a href="#cb88-907" aria-hidden="true" tabindex="-1"></a>Both Q1 and Q4 exhibit strong and consistent commuting peaks during weekday mornings and evenings, reflecting the importance of work-related travel. However, Q4 shows a clearer overall decline in ridership over time and greater variability, as seen in the daily trends and weather patterns. In contrast, Q1 includes more irregular spikes in demand (e.g., event-driven surges such as the February 14 spike noted in the baseline), but overall demand becomes more stable toward the end of the quarter. This indicates that Q4 demand is more weather-sensitive, while Q1 includes both seasonal recovery and event-driven variation.</span>
+<span id="cb88-908"><a href="#cb88-908" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-909"><a href="#cb88-909" aria-hidden="true" tabindex="-1"></a>**Feature Importance:**\</span>
+<span id="cb88-910"><a href="#cb88-910" aria-hidden="true" tabindex="-1"></a>Across both quarters, temporal lag variables (lag1Hour, lag3Hours, lag1day) are the most important predictors, confirming strong persistence in bike demand. However, in Q4, weather-related variables and engineered features such as the “good weather” indicator play a more significant role, reflecting the stronger impact of temperature and precipitation in colder months. Additionally, the inclusion of weekly lag and rolling average features in Q4 provides noticeable improvements, suggesting that capturing cyclical patterns is especially important when demand is more volatile.</span>
+<span id="cb88-911"><a href="#cb88-911" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-912"><a href="#cb88-912" aria-hidden="true" tabindex="-1"></a>Overall, while the same modeling framework performs well across both quarters, Q4 requires greater reliance on weather and engineered temporal features to achieve similar predictive performance, highlighting the importance of seasonality in bike share demand modeling.</span>
 <span id="cb88-913"><a href="#cb88-913" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-914"><a href="#cb88-914" aria-hidden="true" tabindex="-1"></a>Overall, while the same modeling framework performs well across both quarters, Q4 requires greater reliance on weather and engineered temporal features to achieve similar predictive performance, highlighting the importance of seasonality in bike share demand modeling.</span>
+<span id="cb88-914"><a href="#cb88-914" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualize Model Comparison</span></span>
 <span id="cb88-915"><a href="#cb88-915" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-916"><a href="#cb88-916" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-917"><a href="#cb88-917" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-918"><a href="#cb88-918" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualize Model Comparison</span></span>
-<span id="cb88-919"><a href="#cb88-919" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-920"><a href="#cb88-920" aria-hidden="true" tabindex="-1"></a><span class="in">```{r compare_models}</span></span>
-<span id="cb88-921"><a href="#cb88-921" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mae_results, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Model, <span class="sc">-</span>MAE), <span class="at">y =</span> MAE)) <span class="sc">+</span></span>
-<span id="cb88-922"><a href="#cb88-922" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb88-923"><a href="#cb88-923" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(MAE, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb88-924"><a href="#cb88-924" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb88-925"><a href="#cb88-925" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Model Performance Comparison&quot;</span>,</span>
-<span id="cb88-926"><a href="#cb88-926" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Lower MAE = Better Predictions&quot;</span>,</span>
-<span id="cb88-927"><a href="#cb88-927" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Model&quot;</span>,</span>
-<span id="cb88-928"><a href="#cb88-928" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Mean Absolute Error (trips)&quot;</span></span>
-<span id="cb88-929"><a href="#cb88-929" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-930"><a href="#cb88-930" aria-hidden="true" tabindex="-1"></a>  plotTheme <span class="sc">+</span></span>
-<span id="cb88-931"><a href="#cb88-931" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb88-932"><a href="#cb88-932" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-916"><a href="#cb88-916" aria-hidden="true" tabindex="-1"></a><span class="in">```{r compare_models}</span></span>
+<span id="cb88-917"><a href="#cb88-917" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mae_results, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Model, <span class="sc">-</span>MAE), <span class="at">y =</span> MAE)) <span class="sc">+</span></span>
+<span id="cb88-918"><a href="#cb88-918" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;#3182bd&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb88-919"><a href="#cb88-919" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(MAE, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb88-920"><a href="#cb88-920" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb88-921"><a href="#cb88-921" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Model Performance Comparison&quot;</span>,</span>
+<span id="cb88-922"><a href="#cb88-922" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Lower MAE = Better Predictions&quot;</span>,</span>
+<span id="cb88-923"><a href="#cb88-923" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Model&quot;</span>,</span>
+<span id="cb88-924"><a href="#cb88-924" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Mean Absolute Error (trips)&quot;</span></span>
+<span id="cb88-925"><a href="#cb88-925" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-926"><a href="#cb88-926" aria-hidden="true" tabindex="-1"></a>  plotTheme <span class="sc">+</span></span>
+<span id="cb88-927"><a href="#cb88-927" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb88-928"><a href="#cb88-928" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-929"><a href="#cb88-929" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-930"><a href="#cb88-930" aria-hidden="true" tabindex="-1"></a><span class="fu"># SPACE-TIME ERROR ANALYSIS</span></span>
+<span id="cb88-931"><a href="#cb88-931" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-932"><a href="#cb88-932" aria-hidden="true" tabindex="-1"></a><span class="fu">## Observed vs. Predicted</span></span>
 <span id="cb88-933"><a href="#cb88-933" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-934"><a href="#cb88-934" aria-hidden="true" tabindex="-1"></a><span class="fu"># SPACE-TIME ERROR ANALYSIS</span></span>
+<span id="cb88-934"><a href="#cb88-934" aria-hidden="true" tabindex="-1"></a>Let&#39;s use our old best model (Model 2) for error analysis.</span>
 <span id="cb88-935"><a href="#cb88-935" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-936"><a href="#cb88-936" aria-hidden="true" tabindex="-1"></a><span class="fu">## Observed vs. Predicted</span></span>
-<span id="cb88-937"><a href="#cb88-937" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-938"><a href="#cb88-938" aria-hidden="true" tabindex="-1"></a>Let&#39;s use our old best model (Model 2) for error analysis.</span>
+<span id="cb88-936"><a href="#cb88-936" aria-hidden="true" tabindex="-1"></a><span class="in">```{r obs_vs_pred}</span></span>
+<span id="cb88-937"><a href="#cb88-937" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb88-938"><a href="#cb88-938" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
 <span id="cb88-939"><a href="#cb88-939" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-940"><a href="#cb88-940" aria-hidden="true" tabindex="-1"></a><span class="in">```{r obs_vs_pred}</span></span>
-<span id="cb88-941"><a href="#cb88-941" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb88-942"><a href="#cb88-942" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb88-943"><a href="#cb88-943" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-944"><a href="#cb88-944" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
-<span id="cb88-945"><a href="#cb88-945" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb88-946"><a href="#cb88-946" aria-hidden="true" tabindex="-1"></a>    <span class="at">error =</span> Trip_Count <span class="sc">-</span> pred2,</span>
-<span id="cb88-947"><a href="#cb88-947" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_error =</span> <span class="fu">abs</span>(error),</span>
-<span id="cb88-948"><a href="#cb88-948" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_of_day =</span> <span class="fu">case_when</span>(</span>
-<span id="cb88-949"><a href="#cb88-949" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&lt;</span> <span class="dv">7</span> <span class="sc">~</span> <span class="st">&quot;Overnight&quot;</span>,</span>
-<span id="cb88-950"><a href="#cb88-950" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&gt;=</span> <span class="dv">7</span> <span class="sc">&amp;</span> hour <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;AM Rush&quot;</span>,</span>
-<span id="cb88-951"><a href="#cb88-951" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span> hour <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">&quot;Mid-Day&quot;</span>,</span>
-<span id="cb88-952"><a href="#cb88-952" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="sc">&amp;</span> hour <span class="sc">&lt;=</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">&quot;PM Rush&quot;</span>,</span>
-<span id="cb88-953"><a href="#cb88-953" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&gt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">&quot;Evening&quot;</span></span>
-<span id="cb88-954"><a href="#cb88-954" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb88-955"><a href="#cb88-955" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb88-956"><a href="#cb88-956" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-957"><a href="#cb88-957" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot by time and day type</span></span>
-<span id="cb88-958"><a href="#cb88-958" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test, <span class="fu">aes</span>(<span class="at">x =</span> Trip_Count, <span class="at">y =</span> pred2)) <span class="sc">+</span></span>
-<span id="cb88-959"><a href="#cb88-959" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-960"><a href="#cb88-960" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb88-961"><a href="#cb88-961" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-962"><a href="#cb88-962" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(weekend <span class="sc">~</span> time_of_day) <span class="sc">+</span></span>
-<span id="cb88-963"><a href="#cb88-963" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb88-964"><a href="#cb88-964" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Observed vs. Predicted Bike Trips&quot;</span>,</span>
-<span id="cb88-965"><a href="#cb88-965" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Model 2 performance by time period&quot;</span>,</span>
-<span id="cb88-966"><a href="#cb88-966" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Observed Trips&quot;</span>,</span>
-<span id="cb88-967"><a href="#cb88-967" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Predicted Trips&quot;</span>,</span>
-<span id="cb88-968"><a href="#cb88-968" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Red line = perfect predictions; Green line = actual model fit&quot;</span></span>
-<span id="cb88-969"><a href="#cb88-969" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-970"><a href="#cb88-970" aria-hidden="true" tabindex="-1"></a>  plotTheme</span>
-<span id="cb88-971"><a href="#cb88-971" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-940"><a href="#cb88-940" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
+<span id="cb88-941"><a href="#cb88-941" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb88-942"><a href="#cb88-942" aria-hidden="true" tabindex="-1"></a>    <span class="at">error =</span> Trip_Count <span class="sc">-</span> pred2,</span>
+<span id="cb88-943"><a href="#cb88-943" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_error =</span> <span class="fu">abs</span>(error),</span>
+<span id="cb88-944"><a href="#cb88-944" aria-hidden="true" tabindex="-1"></a>    <span class="at">time_of_day =</span> <span class="fu">case_when</span>(</span>
+<span id="cb88-945"><a href="#cb88-945" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&lt;</span> <span class="dv">7</span> <span class="sc">~</span> <span class="st">&quot;Overnight&quot;</span>,</span>
+<span id="cb88-946"><a href="#cb88-946" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&gt;=</span> <span class="dv">7</span> <span class="sc">&amp;</span> hour <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">&quot;AM Rush&quot;</span>,</span>
+<span id="cb88-947"><a href="#cb88-947" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span> hour <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">&quot;Mid-Day&quot;</span>,</span>
+<span id="cb88-948"><a href="#cb88-948" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="sc">&amp;</span> hour <span class="sc">&lt;=</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">&quot;PM Rush&quot;</span>,</span>
+<span id="cb88-949"><a href="#cb88-949" aria-hidden="true" tabindex="-1"></a>      hour <span class="sc">&gt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">&quot;Evening&quot;</span></span>
+<span id="cb88-950"><a href="#cb88-950" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb88-951"><a href="#cb88-951" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb88-952"><a href="#cb88-952" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-953"><a href="#cb88-953" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot by time and day type</span></span>
+<span id="cb88-954"><a href="#cb88-954" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test, <span class="fu">aes</span>(<span class="at">x =</span> Trip_Count, <span class="at">y =</span> pred2)) <span class="sc">+</span></span>
+<span id="cb88-955"><a href="#cb88-955" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-956"><a href="#cb88-956" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb88-957"><a href="#cb88-957" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-958"><a href="#cb88-958" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(weekend <span class="sc">~</span> time_of_day) <span class="sc">+</span></span>
+<span id="cb88-959"><a href="#cb88-959" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb88-960"><a href="#cb88-960" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Observed vs. Predicted Bike Trips&quot;</span>,</span>
+<span id="cb88-961"><a href="#cb88-961" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Model 2 performance by time period&quot;</span>,</span>
+<span id="cb88-962"><a href="#cb88-962" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Observed Trips&quot;</span>,</span>
+<span id="cb88-963"><a href="#cb88-963" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Predicted Trips&quot;</span>,</span>
+<span id="cb88-964"><a href="#cb88-964" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Red line = perfect predictions; Green line = actual model fit&quot;</span></span>
+<span id="cb88-965"><a href="#cb88-965" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-966"><a href="#cb88-966" aria-hidden="true" tabindex="-1"></a>  plotTheme</span>
+<span id="cb88-967"><a href="#cb88-967" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-968"><a href="#cb88-968" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-969"><a href="#cb88-969" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretation</span></span>
+<span id="cb88-970"><a href="#cb88-970" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-971"><a href="#cb88-971" aria-hidden="true" tabindex="-1"></a>The model performs reasonably well overall, with predictions generally tracking observed values. However, there is noticeable dispersion around the ideal prediction line, particularly at higher trip counts.</span>
 <span id="cb88-972"><a href="#cb88-972" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-973"><a href="#cb88-973" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interpretation</span></span>
+<span id="cb88-973"><a href="#cb88-973" aria-hidden="true" tabindex="-1"></a>Errors are more pronounced during peak periods, where demand is both higher and more variable. This suggests that while the model captures general trends, it struggles to fully account for fluctuations during high-demand periods, which are operationally critical for bike rebalancing.</span>
 <span id="cb88-974"><a href="#cb88-974" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-975"><a href="#cb88-975" aria-hidden="true" tabindex="-1"></a>The model performs reasonably well overall, with predictions generally tracking observed values. However, there is noticeable dispersion around the ideal prediction line, particularly at higher trip counts.</span>
+<span id="cb88-975"><a href="#cb88-975" aria-hidden="true" tabindex="-1"></a><span class="fu">## Spatial Error Patterns</span></span>
 <span id="cb88-976"><a href="#cb88-976" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-977"><a href="#cb88-977" aria-hidden="true" tabindex="-1"></a>Errors are more pronounced during peak periods, where demand is both higher and more variable. This suggests that while the model captures general trends, it struggles to fully account for fluctuations during high-demand periods, which are operationally critical for bike rebalancing.</span>
+<span id="cb88-977"><a href="#cb88-977" aria-hidden="true" tabindex="-1"></a>Are prediction errors clustered in certain parts of Philadelphia?</span>
 <span id="cb88-978"><a href="#cb88-978" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-979"><a href="#cb88-979" aria-hidden="true" tabindex="-1"></a><span class="fu">## Spatial Error Patterns</span></span>
-<span id="cb88-980"><a href="#cb88-980" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-981"><a href="#cb88-981" aria-hidden="true" tabindex="-1"></a>Are prediction errors clustered in certain parts of Philadelphia?</span>
-<span id="cb88-982"><a href="#cb88-982" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-983"><a href="#cb88-983" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spatial_errors}</span></span>
-<span id="cb88-984"><a href="#cb88-984" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MAE by station</span></span>
-<span id="cb88-985"><a href="#cb88-985" aria-hidden="true" tabindex="-1"></a>station_errors <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
-<span id="cb88-986"><a href="#cb88-986" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station, start_lat, start_lon) <span class="sc">%&gt;%</span></span>
-<span id="cb88-987"><a href="#cb88-987" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb88-988"><a href="#cb88-988" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAE =</span> <span class="fu">mean</span>(abs_error, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb88-989"><a href="#cb88-989" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_demand =</span> <span class="fu">mean</span>(Trip_Count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb88-990"><a href="#cb88-990" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
-<span id="cb88-991"><a href="#cb88-991" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb88-992"><a href="#cb88-992" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(start_lat), <span class="sc">!</span><span class="fu">is.na</span>(start_lon))</span>
-<span id="cb88-993"><a href="#cb88-993" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-994"><a href="#cb88-994" aria-hidden="true" tabindex="-1"></a><span class="do">## Create Two Maps Side-by-Side with Proper Legends (sorry these maps are ugly)</span></span>
-<span id="cb88-995"><a href="#cb88-995" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-996"><a href="#cb88-996" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate station errors</span></span>
-<span id="cb88-997"><a href="#cb88-997" aria-hidden="true" tabindex="-1"></a>station_errors <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
-<span id="cb88-998"><a href="#cb88-998" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pred2)) <span class="sc">%&gt;%</span></span>
-<span id="cb88-999"><a href="#cb88-999" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station, start_lat, start_lon) <span class="sc">%&gt;%</span></span>
-<span id="cb88-1000"><a href="#cb88-1000" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb88-1001"><a href="#cb88-1001" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAE =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(Trip_Count <span class="sc">-</span> pred2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb88-1002"><a href="#cb88-1002" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_demand =</span> <span class="fu">mean</span>(Trip_Count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb88-1003"><a href="#cb88-1003" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
-<span id="cb88-1004"><a href="#cb88-1004" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb88-1005"><a href="#cb88-1005" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(start_lat), <span class="sc">!</span><span class="fu">is.na</span>(start_lon))</span>
-<span id="cb88-1006"><a href="#cb88-1006" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1007"><a href="#cb88-1007" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 1: Prediction Errors</span></span>
-<span id="cb88-1008"><a href="#cb88-1008" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb88-1009"><a href="#cb88-1009" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> philly_census, <span class="at">fill =</span> <span class="st">&quot;grey95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb88-1010"><a href="#cb88-1010" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb88-1011"><a href="#cb88-1011" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> station_errors,</span>
-<span id="cb88-1012"><a href="#cb88-1012" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">color =</span> MAE),</span>
-<span id="cb88-1013"><a href="#cb88-1013" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span>,</span>
-<span id="cb88-1014"><a href="#cb88-1014" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
-<span id="cb88-1015"><a href="#cb88-1015" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1016"><a href="#cb88-1016" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(</span>
-<span id="cb88-1017"><a href="#cb88-1017" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>,</span>
-<span id="cb88-1018"><a href="#cb88-1018" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;MAE</span><span class="sc">\n</span><span class="st">(trips)&quot;</span>,</span>
-<span id="cb88-1019"><a href="#cb88-1019" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb88-1020"><a href="#cb88-1020" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>),  <span class="co"># Fewer, cleaner breaks</span></span>
-<span id="cb88-1021"><a href="#cb88-1021" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1.0&quot;</span>, <span class="st">&quot;1.5&quot;</span>)</span>
-<span id="cb88-1022"><a href="#cb88-1022" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1023"><a href="#cb88-1023" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Prediction Errors&quot;</span>,</span>
-<span id="cb88-1024"><a href="#cb88-1024" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Higher in Center City&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1025"><a href="#cb88-1025" aria-hidden="true" tabindex="-1"></a>  mapTheme <span class="sc">+</span></span>
-<span id="cb88-1026"><a href="#cb88-1026" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb88-1027"><a href="#cb88-1027" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
-<span id="cb88-1028"><a href="#cb88-1028" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb88-1029"><a href="#cb88-1029" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb88-1030"><a href="#cb88-1030" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb88-1031"><a href="#cb88-1031" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
-<span id="cb88-1032"><a href="#cb88-1032" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1033"><a href="#cb88-1033" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_colorbar</span>(</span>
-<span id="cb88-1034"><a href="#cb88-1034" aria-hidden="true" tabindex="-1"></a>    <span class="at">barwidth =</span> <span class="fl">1.5</span>,</span>
-<span id="cb88-1035"><a href="#cb88-1035" aria-hidden="true" tabindex="-1"></a>    <span class="at">barheight =</span> <span class="dv">12</span>,</span>
-<span id="cb88-1036"><a href="#cb88-1036" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb88-1037"><a href="#cb88-1037" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.hjust =</span> <span class="fl">0.5</span></span>
-<span id="cb88-1038"><a href="#cb88-1038" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb88-1039"><a href="#cb88-1039" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1040"><a href="#cb88-1040" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 2: Average Demand</span></span>
-<span id="cb88-1041"><a href="#cb88-1041" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb88-1042"><a href="#cb88-1042" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> philly_census, <span class="at">fill =</span> <span class="st">&quot;grey95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb88-1043"><a href="#cb88-1043" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb88-1044"><a href="#cb88-1044" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> station_errors,</span>
-<span id="cb88-1045"><a href="#cb88-1045" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">color =</span> avg_demand),</span>
-<span id="cb88-1046"><a href="#cb88-1046" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span>,</span>
-<span id="cb88-1047"><a href="#cb88-1047" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
-<span id="cb88-1048"><a href="#cb88-1048" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1049"><a href="#cb88-1049" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(</span>
-<span id="cb88-1050"><a href="#cb88-1050" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">&quot;viridis&quot;</span>,</span>
-<span id="cb88-1051"><a href="#cb88-1051" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Avg</span><span class="sc">\n</span><span class="st">Demand&quot;</span>,</span>
-<span id="cb88-1052"><a href="#cb88-1052" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb88-1053"><a href="#cb88-1053" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">2.5</span>),  <span class="co"># Clear breaks</span></span>
-<span id="cb88-1054"><a href="#cb88-1054" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1.0&quot;</span>, <span class="st">&quot;1.5&quot;</span>, <span class="st">&quot;2.0&quot;</span>, <span class="st">&quot;2.5&quot;</span>)</span>
-<span id="cb88-1055"><a href="#cb88-1055" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1056"><a href="#cb88-1056" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Average Demand&quot;</span>,</span>
-<span id="cb88-1057"><a href="#cb88-1057" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trips per station-hour&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1058"><a href="#cb88-1058" aria-hidden="true" tabindex="-1"></a>  mapTheme <span class="sc">+</span></span>
-<span id="cb88-1059"><a href="#cb88-1059" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb88-1060"><a href="#cb88-1060" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
-<span id="cb88-1061"><a href="#cb88-1061" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb88-1062"><a href="#cb88-1062" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb88-1063"><a href="#cb88-1063" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb88-1064"><a href="#cb88-1064" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
-<span id="cb88-1065"><a href="#cb88-1065" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1066"><a href="#cb88-1066" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_colorbar</span>(</span>
-<span id="cb88-1067"><a href="#cb88-1067" aria-hidden="true" tabindex="-1"></a>    <span class="at">barwidth =</span> <span class="fl">1.5</span>,</span>
-<span id="cb88-1068"><a href="#cb88-1068" aria-hidden="true" tabindex="-1"></a>    <span class="at">barheight =</span> <span class="dv">12</span>,</span>
-<span id="cb88-1069"><a href="#cb88-1069" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb88-1070"><a href="#cb88-1070" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.hjust =</span> <span class="fl">0.5</span></span>
-<span id="cb88-1071"><a href="#cb88-1071" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb88-1072"><a href="#cb88-1072" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1073"><a href="#cb88-1073" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1074"><a href="#cb88-1074" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1075"><a href="#cb88-1075" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1076"><a href="#cb88-1076" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 1: Prediction Errors</span></span>
-<span id="cb88-1077"><a href="#cb88-1077" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb88-1078"><a href="#cb88-1078" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> philly_census, <span class="at">fill =</span> <span class="st">&quot;grey95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb88-1079"><a href="#cb88-1079" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb88-1080"><a href="#cb88-1080" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> station_errors,</span>
-<span id="cb88-1081"><a href="#cb88-1081" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">color =</span> MAE),</span>
-<span id="cb88-1082"><a href="#cb88-1082" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span>,</span>
-<span id="cb88-1083"><a href="#cb88-1083" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
-<span id="cb88-1084"><a href="#cb88-1084" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1085"><a href="#cb88-1085" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(</span>
-<span id="cb88-1086"><a href="#cb88-1086" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>,</span>
-<span id="cb88-1087"><a href="#cb88-1087" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;MAE (trips)&quot;</span>,</span>
-<span id="cb88-1088"><a href="#cb88-1088" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb88-1089"><a href="#cb88-1089" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>),</span>
-<span id="cb88-1090"><a href="#cb88-1090" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1.0&quot;</span>, <span class="st">&quot;1.5&quot;</span>)</span>
-<span id="cb88-1091"><a href="#cb88-1091" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1092"><a href="#cb88-1092" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Prediction Errors&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1093"><a href="#cb88-1093" aria-hidden="true" tabindex="-1"></a>  mapTheme <span class="sc">+</span></span>
-<span id="cb88-1094"><a href="#cb88-1094" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb88-1095"><a href="#cb88-1095" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb88-1096"><a href="#cb88-1096" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb88-1097"><a href="#cb88-1097" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb88-1098"><a href="#cb88-1098" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
-<span id="cb88-1099"><a href="#cb88-1099" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1100"><a href="#cb88-1100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_colorbar</span>(</span>
-<span id="cb88-1101"><a href="#cb88-1101" aria-hidden="true" tabindex="-1"></a>    <span class="at">barwidth =</span> <span class="dv">12</span>,</span>
-<span id="cb88-1102"><a href="#cb88-1102" aria-hidden="true" tabindex="-1"></a>    <span class="at">barheight =</span> <span class="dv">1</span>,</span>
-<span id="cb88-1103"><a href="#cb88-1103" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb88-1104"><a href="#cb88-1104" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.hjust =</span> <span class="fl">0.5</span></span>
-<span id="cb88-1105"><a href="#cb88-1105" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb88-1106"><a href="#cb88-1106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1107"><a href="#cb88-1107" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 2: Average Demand  </span></span>
-<span id="cb88-1108"><a href="#cb88-1108" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb88-1109"><a href="#cb88-1109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> philly_census, <span class="at">fill =</span> <span class="st">&quot;grey95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb88-1110"><a href="#cb88-1110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb88-1111"><a href="#cb88-1111" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> station_errors,</span>
-<span id="cb88-1112"><a href="#cb88-1112" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">color =</span> avg_demand),</span>
-<span id="cb88-1113"><a href="#cb88-1113" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span>,</span>
-<span id="cb88-1114"><a href="#cb88-1114" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
-<span id="cb88-1115"><a href="#cb88-1115" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1116"><a href="#cb88-1116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(</span>
-<span id="cb88-1117"><a href="#cb88-1117" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">&quot;viridis&quot;</span>,</span>
-<span id="cb88-1118"><a href="#cb88-1118" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Avg Demand (trips/hour)&quot;</span>,</span>
-<span id="cb88-1119"><a href="#cb88-1119" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb88-1120"><a href="#cb88-1120" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">2.5</span>),</span>
-<span id="cb88-1121"><a href="#cb88-1121" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1.0&quot;</span>, <span class="st">&quot;1.5&quot;</span>, <span class="st">&quot;2.0&quot;</span>, <span class="st">&quot;2.5&quot;</span>)</span>
-<span id="cb88-1122"><a href="#cb88-1122" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1123"><a href="#cb88-1123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Average Demand&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1124"><a href="#cb88-1124" aria-hidden="true" tabindex="-1"></a>  mapTheme <span class="sc">+</span></span>
-<span id="cb88-1125"><a href="#cb88-1125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb88-1126"><a href="#cb88-1126" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb88-1127"><a href="#cb88-1127" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb88-1128"><a href="#cb88-1128" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb88-1129"><a href="#cb88-1129" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
-<span id="cb88-1130"><a href="#cb88-1130" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1131"><a href="#cb88-1131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_colorbar</span>(</span>
-<span id="cb88-1132"><a href="#cb88-1132" aria-hidden="true" tabindex="-1"></a>    <span class="at">barwidth =</span> <span class="dv">12</span>,</span>
-<span id="cb88-1133"><a href="#cb88-1133" aria-hidden="true" tabindex="-1"></a>    <span class="at">barheight =</span> <span class="dv">1</span>,</span>
-<span id="cb88-1134"><a href="#cb88-1134" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb88-1135"><a href="#cb88-1135" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.hjust =</span> <span class="fl">0.5</span></span>
-<span id="cb88-1136"><a href="#cb88-1136" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb88-1137"><a href="#cb88-1137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1138"><a href="#cb88-1138" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine</span></span>
-<span id="cb88-1139"><a href="#cb88-1139" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2)</span>
+<span id="cb88-979"><a href="#cb88-979" aria-hidden="true" tabindex="-1"></a><span class="in">```{r spatial_errors}</span></span>
+<span id="cb88-980"><a href="#cb88-980" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MAE by station</span></span>
+<span id="cb88-981"><a href="#cb88-981" aria-hidden="true" tabindex="-1"></a>station_errors <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
+<span id="cb88-982"><a href="#cb88-982" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station, start_lat, start_lon) <span class="sc">%&gt;%</span></span>
+<span id="cb88-983"><a href="#cb88-983" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb88-984"><a href="#cb88-984" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAE =</span> <span class="fu">mean</span>(abs_error, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb88-985"><a href="#cb88-985" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_demand =</span> <span class="fu">mean</span>(Trip_Count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb88-986"><a href="#cb88-986" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb88-987"><a href="#cb88-987" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb88-988"><a href="#cb88-988" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(start_lat), <span class="sc">!</span><span class="fu">is.na</span>(start_lon))</span>
+<span id="cb88-989"><a href="#cb88-989" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-990"><a href="#cb88-990" aria-hidden="true" tabindex="-1"></a><span class="do">## Create Two Maps Side-by-Side with Proper Legends (sorry these maps are ugly)</span></span>
+<span id="cb88-991"><a href="#cb88-991" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-992"><a href="#cb88-992" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate station errors</span></span>
+<span id="cb88-993"><a href="#cb88-993" aria-hidden="true" tabindex="-1"></a>station_errors <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
+<span id="cb88-994"><a href="#cb88-994" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pred2)) <span class="sc">%&gt;%</span></span>
+<span id="cb88-995"><a href="#cb88-995" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station, start_lat, start_lon) <span class="sc">%&gt;%</span></span>
+<span id="cb88-996"><a href="#cb88-996" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb88-997"><a href="#cb88-997" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAE =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(Trip_Count <span class="sc">-</span> pred2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb88-998"><a href="#cb88-998" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_demand =</span> <span class="fu">mean</span>(Trip_Count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb88-999"><a href="#cb88-999" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb88-1000"><a href="#cb88-1000" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb88-1001"><a href="#cb88-1001" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(start_lat), <span class="sc">!</span><span class="fu">is.na</span>(start_lon))</span>
+<span id="cb88-1002"><a href="#cb88-1002" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1003"><a href="#cb88-1003" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 1: Prediction Errors</span></span>
+<span id="cb88-1004"><a href="#cb88-1004" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb88-1005"><a href="#cb88-1005" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> philly_census, <span class="at">fill =</span> <span class="st">&quot;grey95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb88-1006"><a href="#cb88-1006" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb88-1007"><a href="#cb88-1007" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> station_errors,</span>
+<span id="cb88-1008"><a href="#cb88-1008" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">color =</span> MAE),</span>
+<span id="cb88-1009"><a href="#cb88-1009" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span>,</span>
+<span id="cb88-1010"><a href="#cb88-1010" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb88-1011"><a href="#cb88-1011" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1012"><a href="#cb88-1012" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(</span>
+<span id="cb88-1013"><a href="#cb88-1013" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>,</span>
+<span id="cb88-1014"><a href="#cb88-1014" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;MAE</span><span class="sc">\n</span><span class="st">(trips)&quot;</span>,</span>
+<span id="cb88-1015"><a href="#cb88-1015" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb88-1016"><a href="#cb88-1016" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>),  <span class="co"># Fewer, cleaner breaks</span></span>
+<span id="cb88-1017"><a href="#cb88-1017" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1.0&quot;</span>, <span class="st">&quot;1.5&quot;</span>)</span>
+<span id="cb88-1018"><a href="#cb88-1018" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1019"><a href="#cb88-1019" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Prediction Errors&quot;</span>,</span>
+<span id="cb88-1020"><a href="#cb88-1020" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Higher in Center City&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1021"><a href="#cb88-1021" aria-hidden="true" tabindex="-1"></a>  mapTheme <span class="sc">+</span></span>
+<span id="cb88-1022"><a href="#cb88-1022" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb88-1023"><a href="#cb88-1023" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb88-1024"><a href="#cb88-1024" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb88-1025"><a href="#cb88-1025" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb88-1026"><a href="#cb88-1026" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb88-1027"><a href="#cb88-1027" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb88-1028"><a href="#cb88-1028" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1029"><a href="#cb88-1029" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_colorbar</span>(</span>
+<span id="cb88-1030"><a href="#cb88-1030" aria-hidden="true" tabindex="-1"></a>    <span class="at">barwidth =</span> <span class="fl">1.5</span>,</span>
+<span id="cb88-1031"><a href="#cb88-1031" aria-hidden="true" tabindex="-1"></a>    <span class="at">barheight =</span> <span class="dv">12</span>,</span>
+<span id="cb88-1032"><a href="#cb88-1032" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb88-1033"><a href="#cb88-1033" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb88-1034"><a href="#cb88-1034" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb88-1035"><a href="#cb88-1035" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1036"><a href="#cb88-1036" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 2: Average Demand</span></span>
+<span id="cb88-1037"><a href="#cb88-1037" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb88-1038"><a href="#cb88-1038" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> philly_census, <span class="at">fill =</span> <span class="st">&quot;grey95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb88-1039"><a href="#cb88-1039" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb88-1040"><a href="#cb88-1040" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> station_errors,</span>
+<span id="cb88-1041"><a href="#cb88-1041" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">color =</span> avg_demand),</span>
+<span id="cb88-1042"><a href="#cb88-1042" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span>,</span>
+<span id="cb88-1043"><a href="#cb88-1043" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb88-1044"><a href="#cb88-1044" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1045"><a href="#cb88-1045" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(</span>
+<span id="cb88-1046"><a href="#cb88-1046" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">&quot;viridis&quot;</span>,</span>
+<span id="cb88-1047"><a href="#cb88-1047" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Avg</span><span class="sc">\n</span><span class="st">Demand&quot;</span>,</span>
+<span id="cb88-1048"><a href="#cb88-1048" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb88-1049"><a href="#cb88-1049" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">2.5</span>),  <span class="co"># Clear breaks</span></span>
+<span id="cb88-1050"><a href="#cb88-1050" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1.0&quot;</span>, <span class="st">&quot;1.5&quot;</span>, <span class="st">&quot;2.0&quot;</span>, <span class="st">&quot;2.5&quot;</span>)</span>
+<span id="cb88-1051"><a href="#cb88-1051" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1052"><a href="#cb88-1052" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Average Demand&quot;</span>,</span>
+<span id="cb88-1053"><a href="#cb88-1053" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trips per station-hour&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1054"><a href="#cb88-1054" aria-hidden="true" tabindex="-1"></a>  mapTheme <span class="sc">+</span></span>
+<span id="cb88-1055"><a href="#cb88-1055" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb88-1056"><a href="#cb88-1056" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb88-1057"><a href="#cb88-1057" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb88-1058"><a href="#cb88-1058" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb88-1059"><a href="#cb88-1059" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb88-1060"><a href="#cb88-1060" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb88-1061"><a href="#cb88-1061" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1062"><a href="#cb88-1062" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_colorbar</span>(</span>
+<span id="cb88-1063"><a href="#cb88-1063" aria-hidden="true" tabindex="-1"></a>    <span class="at">barwidth =</span> <span class="fl">1.5</span>,</span>
+<span id="cb88-1064"><a href="#cb88-1064" aria-hidden="true" tabindex="-1"></a>    <span class="at">barheight =</span> <span class="dv">12</span>,</span>
+<span id="cb88-1065"><a href="#cb88-1065" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb88-1066"><a href="#cb88-1066" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb88-1067"><a href="#cb88-1067" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb88-1068"><a href="#cb88-1068" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1069"><a href="#cb88-1069" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1070"><a href="#cb88-1070" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1071"><a href="#cb88-1071" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1072"><a href="#cb88-1072" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 1: Prediction Errors</span></span>
+<span id="cb88-1073"><a href="#cb88-1073" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb88-1074"><a href="#cb88-1074" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> philly_census, <span class="at">fill =</span> <span class="st">&quot;grey95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb88-1075"><a href="#cb88-1075" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb88-1076"><a href="#cb88-1076" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> station_errors,</span>
+<span id="cb88-1077"><a href="#cb88-1077" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">color =</span> MAE),</span>
+<span id="cb88-1078"><a href="#cb88-1078" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span>,</span>
+<span id="cb88-1079"><a href="#cb88-1079" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb88-1080"><a href="#cb88-1080" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1081"><a href="#cb88-1081" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(</span>
+<span id="cb88-1082"><a href="#cb88-1082" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>,</span>
+<span id="cb88-1083"><a href="#cb88-1083" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;MAE (trips)&quot;</span>,</span>
+<span id="cb88-1084"><a href="#cb88-1084" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb88-1085"><a href="#cb88-1085" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>),</span>
+<span id="cb88-1086"><a href="#cb88-1086" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1.0&quot;</span>, <span class="st">&quot;1.5&quot;</span>)</span>
+<span id="cb88-1087"><a href="#cb88-1087" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1088"><a href="#cb88-1088" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Prediction Errors&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1089"><a href="#cb88-1089" aria-hidden="true" tabindex="-1"></a>  mapTheme <span class="sc">+</span></span>
+<span id="cb88-1090"><a href="#cb88-1090" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb88-1091"><a href="#cb88-1091" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb88-1092"><a href="#cb88-1092" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb88-1093"><a href="#cb88-1093" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb88-1094"><a href="#cb88-1094" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb88-1095"><a href="#cb88-1095" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1096"><a href="#cb88-1096" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_colorbar</span>(</span>
+<span id="cb88-1097"><a href="#cb88-1097" aria-hidden="true" tabindex="-1"></a>    <span class="at">barwidth =</span> <span class="dv">12</span>,</span>
+<span id="cb88-1098"><a href="#cb88-1098" aria-hidden="true" tabindex="-1"></a>    <span class="at">barheight =</span> <span class="dv">1</span>,</span>
+<span id="cb88-1099"><a href="#cb88-1099" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb88-1100"><a href="#cb88-1100" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb88-1101"><a href="#cb88-1101" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb88-1102"><a href="#cb88-1102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1103"><a href="#cb88-1103" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 2: Average Demand  </span></span>
+<span id="cb88-1104"><a href="#cb88-1104" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb88-1105"><a href="#cb88-1105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> philly_census, <span class="at">fill =</span> <span class="st">&quot;grey95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb88-1106"><a href="#cb88-1106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb88-1107"><a href="#cb88-1107" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> station_errors,</span>
+<span id="cb88-1108"><a href="#cb88-1108" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">color =</span> avg_demand),</span>
+<span id="cb88-1109"><a href="#cb88-1109" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span>,</span>
+<span id="cb88-1110"><a href="#cb88-1110" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb88-1111"><a href="#cb88-1111" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1112"><a href="#cb88-1112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(</span>
+<span id="cb88-1113"><a href="#cb88-1113" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">&quot;viridis&quot;</span>,</span>
+<span id="cb88-1114"><a href="#cb88-1114" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Avg Demand (trips/hour)&quot;</span>,</span>
+<span id="cb88-1115"><a href="#cb88-1115" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb88-1116"><a href="#cb88-1116" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">2.5</span>),</span>
+<span id="cb88-1117"><a href="#cb88-1117" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1.0&quot;</span>, <span class="st">&quot;1.5&quot;</span>, <span class="st">&quot;2.0&quot;</span>, <span class="st">&quot;2.5&quot;</span>)</span>
+<span id="cb88-1118"><a href="#cb88-1118" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1119"><a href="#cb88-1119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Average Demand&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1120"><a href="#cb88-1120" aria-hidden="true" tabindex="-1"></a>  mapTheme <span class="sc">+</span></span>
+<span id="cb88-1121"><a href="#cb88-1121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb88-1122"><a href="#cb88-1122" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb88-1123"><a href="#cb88-1123" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb88-1124"><a href="#cb88-1124" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb88-1125"><a href="#cb88-1125" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb88-1126"><a href="#cb88-1126" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1127"><a href="#cb88-1127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_colorbar</span>(</span>
+<span id="cb88-1128"><a href="#cb88-1128" aria-hidden="true" tabindex="-1"></a>    <span class="at">barwidth =</span> <span class="dv">12</span>,</span>
+<span id="cb88-1129"><a href="#cb88-1129" aria-hidden="true" tabindex="-1"></a>    <span class="at">barheight =</span> <span class="dv">1</span>,</span>
+<span id="cb88-1130"><a href="#cb88-1130" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb88-1131"><a href="#cb88-1131" aria-hidden="true" tabindex="-1"></a>    <span class="at">title.hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb88-1132"><a href="#cb88-1132" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb88-1133"><a href="#cb88-1133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1134"><a href="#cb88-1134" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine</span></span>
+<span id="cb88-1135"><a href="#cb88-1135" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2)</span>
+<span id="cb88-1136"><a href="#cb88-1136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1137"><a href="#cb88-1137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-1138"><a href="#cb88-1138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1139"><a href="#cb88-1139" aria-hidden="true" tabindex="-1"></a><span class="fu">### Spatial Error Patterns</span></span>
 <span id="cb88-1140"><a href="#cb88-1140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1141"><a href="#cb88-1141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-1141"><a href="#cb88-1141" aria-hidden="true" tabindex="-1"></a>Prediction errors are spatially concentrated in high-demand areas, particularly in Center City and surrounding commercial districts. These areas likely experience more dynamic and context-dependent demand influenced by factors such as employment density, tourism, and special events.</span>
 <span id="cb88-1142"><a href="#cb88-1142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1143"><a href="#cb88-1143" aria-hidden="true" tabindex="-1"></a><span class="fu">### Spatial Error Patterns</span></span>
+<span id="cb88-1143"><a href="#cb88-1143" aria-hidden="true" tabindex="-1"></a>In contrast, stations in lower-demand residential neighborhoods tend to have lower errors, reflecting more stable and predictable usage patterns.</span>
 <span id="cb88-1144"><a href="#cb88-1144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1145"><a href="#cb88-1145" aria-hidden="true" tabindex="-1"></a>Prediction errors are spatially concentrated in high-demand areas, particularly in Center City and surrounding commercial districts. These areas likely experience more dynamic and context-dependent demand influenced by factors such as employment density, tourism, and special events.</span>
+<span id="cb88-1145"><a href="#cb88-1145" aria-hidden="true" tabindex="-1"></a>These findings suggest that the model performs best in areas with consistent demand but struggles in locations where demand is driven by complex, unobserved factors. Incorporating additional spatial features such as proximity to employment centers or points of interest could improve performance in these areas.</span>
 <span id="cb88-1146"><a href="#cb88-1146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1147"><a href="#cb88-1147" aria-hidden="true" tabindex="-1"></a>In contrast, stations in lower-demand residential neighborhoods tend to have lower errors, reflecting more stable and predictable usage patterns.</span>
+<span id="cb88-1147"><a href="#cb88-1147" aria-hidden="true" tabindex="-1"></a><span class="fu">## Temporal Error Patterns</span></span>
 <span id="cb88-1148"><a href="#cb88-1148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1149"><a href="#cb88-1149" aria-hidden="true" tabindex="-1"></a>These findings suggest that the model performs best in areas with consistent demand but struggles in locations where demand is driven by complex, unobserved factors. Incorporating additional spatial features such as proximity to employment centers or points of interest could improve performance in these areas.</span>
+<span id="cb88-1149"><a href="#cb88-1149" aria-hidden="true" tabindex="-1"></a>When are we most wrong?</span>
 <span id="cb88-1150"><a href="#cb88-1150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1151"><a href="#cb88-1151" aria-hidden="true" tabindex="-1"></a><span class="fu">## Temporal Error Patterns</span></span>
-<span id="cb88-1152"><a href="#cb88-1152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1153"><a href="#cb88-1153" aria-hidden="true" tabindex="-1"></a>When are we most wrong?</span>
-<span id="cb88-1154"><a href="#cb88-1154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1155"><a href="#cb88-1155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r temporal_errors}</span></span>
-<span id="cb88-1156"><a href="#cb88-1156" aria-hidden="true" tabindex="-1"></a><span class="co"># MAE by time of day and day type</span></span>
-<span id="cb88-1157"><a href="#cb88-1157" aria-hidden="true" tabindex="-1"></a>temporal_errors <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
-<span id="cb88-1158"><a href="#cb88-1158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time_of_day, weekend) <span class="sc">%&gt;%</span></span>
-<span id="cb88-1159"><a href="#cb88-1159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb88-1160"><a href="#cb88-1160" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAE =</span> <span class="fu">mean</span>(abs_error, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb88-1161"><a href="#cb88-1161" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
-<span id="cb88-1162"><a href="#cb88-1162" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb88-1163"><a href="#cb88-1163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">ifelse</span>(weekend <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;Weekend&quot;</span>, <span class="st">&quot;Weekday&quot;</span>))</span>
-<span id="cb88-1164"><a href="#cb88-1164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1165"><a href="#cb88-1165" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temporal_errors, <span class="fu">aes</span>(<span class="at">x =</span> time_of_day, <span class="at">y =</span> MAE, <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
-<span id="cb88-1166"><a href="#cb88-1166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1167"><a href="#cb88-1167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Weekday&quot;</span> <span class="ot">=</span> <span class="st">&quot;#08519c&quot;</span>, <span class="st">&quot;Weekend&quot;</span> <span class="ot">=</span> <span class="st">&quot;#6baed6&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb88-1168"><a href="#cb88-1168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb88-1169"><a href="#cb88-1169" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Prediction Errors by Time Period&quot;</span>,</span>
-<span id="cb88-1170"><a href="#cb88-1170" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;When is the model struggling most?&quot;</span>,</span>
-<span id="cb88-1171"><a href="#cb88-1171" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Time of Day&quot;</span>,</span>
-<span id="cb88-1172"><a href="#cb88-1172" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Mean Absolute Error (trips)&quot;</span>,</span>
-<span id="cb88-1173"><a href="#cb88-1173" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;Day Type&quot;</span></span>
-<span id="cb88-1174"><a href="#cb88-1174" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-1175"><a href="#cb88-1175" aria-hidden="true" tabindex="-1"></a>  plotTheme <span class="sc">+</span></span>
-<span id="cb88-1176"><a href="#cb88-1176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb88-1177"><a href="#cb88-1177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-1151"><a href="#cb88-1151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r temporal_errors}</span></span>
+<span id="cb88-1152"><a href="#cb88-1152" aria-hidden="true" tabindex="-1"></a><span class="co"># MAE by time of day and day type</span></span>
+<span id="cb88-1153"><a href="#cb88-1153" aria-hidden="true" tabindex="-1"></a>temporal_errors <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span></span>
+<span id="cb88-1154"><a href="#cb88-1154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time_of_day, weekend) <span class="sc">%&gt;%</span></span>
+<span id="cb88-1155"><a href="#cb88-1155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb88-1156"><a href="#cb88-1156" aria-hidden="true" tabindex="-1"></a>    <span class="at">MAE =</span> <span class="fu">mean</span>(abs_error, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb88-1157"><a href="#cb88-1157" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb88-1158"><a href="#cb88-1158" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb88-1159"><a href="#cb88-1159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day_type =</span> <span class="fu">ifelse</span>(weekend <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;Weekend&quot;</span>, <span class="st">&quot;Weekday&quot;</span>))</span>
+<span id="cb88-1160"><a href="#cb88-1160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1161"><a href="#cb88-1161" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temporal_errors, <span class="fu">aes</span>(<span class="at">x =</span> time_of_day, <span class="at">y =</span> MAE, <span class="at">fill =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb88-1162"><a href="#cb88-1162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1163"><a href="#cb88-1163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Weekday&quot;</span> <span class="ot">=</span> <span class="st">&quot;#08519c&quot;</span>, <span class="st">&quot;Weekend&quot;</span> <span class="ot">=</span> <span class="st">&quot;#6baed6&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb88-1164"><a href="#cb88-1164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb88-1165"><a href="#cb88-1165" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Prediction Errors by Time Period&quot;</span>,</span>
+<span id="cb88-1166"><a href="#cb88-1166" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;When is the model struggling most?&quot;</span>,</span>
+<span id="cb88-1167"><a href="#cb88-1167" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Time of Day&quot;</span>,</span>
+<span id="cb88-1168"><a href="#cb88-1168" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Mean Absolute Error (trips)&quot;</span>,</span>
+<span id="cb88-1169"><a href="#cb88-1169" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;Day Type&quot;</span></span>
+<span id="cb88-1170"><a href="#cb88-1170" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-1171"><a href="#cb88-1171" aria-hidden="true" tabindex="-1"></a>  plotTheme <span class="sc">+</span></span>
+<span id="cb88-1172"><a href="#cb88-1172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb88-1173"><a href="#cb88-1173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-1174"><a href="#cb88-1174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1175"><a href="#cb88-1175" aria-hidden="true" tabindex="-1"></a><span class="fu">### Temporal Error Patterns</span></span>
+<span id="cb88-1176"><a href="#cb88-1176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1177"><a href="#cb88-1177" aria-hidden="true" tabindex="-1"></a>Prediction errors vary systematically across time periods. Errors are highest during peak commuting hours, particularly during morning and evening rush periods, when demand is both high and more volatile.</span>
 <span id="cb88-1178"><a href="#cb88-1178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1179"><a href="#cb88-1179" aria-hidden="true" tabindex="-1"></a><span class="fu">### Temporal Error Patterns</span></span>
+<span id="cb88-1179"><a href="#cb88-1179" aria-hidden="true" tabindex="-1"></a>In contrast, overnight and low-demand periods exhibit lower errors, as usage is minimal and more stable.</span>
 <span id="cb88-1180"><a href="#cb88-1180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1181"><a href="#cb88-1181" aria-hidden="true" tabindex="-1"></a>Prediction errors vary systematically across time periods. Errors are highest during peak commuting hours, particularly during morning and evening rush periods, when demand is both high and more volatile.</span>
+<span id="cb88-1181"><a href="#cb88-1181" aria-hidden="true" tabindex="-1"></a>There are also differences between weekdays and weekends, reflecting distinct travel behaviors. These patterns indicate that the model struggles most during high-demand periods, which are also the most important for operational decision-making.</span>
 <span id="cb88-1182"><a href="#cb88-1182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1183"><a href="#cb88-1183" aria-hidden="true" tabindex="-1"></a>In contrast, overnight and low-demand periods exhibit lower errors, as usage is minimal and more stable.</span>
+<span id="cb88-1183"><a href="#cb88-1183" aria-hidden="true" tabindex="-1"></a><span class="fu">## Errors and Demographics</span></span>
 <span id="cb88-1184"><a href="#cb88-1184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1185"><a href="#cb88-1185" aria-hidden="true" tabindex="-1"></a>There are also differences between weekdays and weekends, reflecting distinct travel behaviors. These patterns indicate that the model struggles most during high-demand periods, which are also the most important for operational decision-making.</span>
+<span id="cb88-1185"><a href="#cb88-1185" aria-hidden="true" tabindex="-1"></a>Are prediction errors related to neighborhood characteristics?</span>
 <span id="cb88-1186"><a href="#cb88-1186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1187"><a href="#cb88-1187" aria-hidden="true" tabindex="-1"></a><span class="fu">## Errors and Demographics</span></span>
-<span id="cb88-1188"><a href="#cb88-1188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1189"><a href="#cb88-1189" aria-hidden="true" tabindex="-1"></a>Are prediction errors related to neighborhood characteristics?</span>
+<span id="cb88-1187"><a href="#cb88-1187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r errors_demographics}</span></span>
+<span id="cb88-1188"><a href="#cb88-1188" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb88-1189"><a href="#cb88-1189" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
 <span id="cb88-1190"><a href="#cb88-1190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1191"><a href="#cb88-1191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r errors_demographics}</span></span>
-<span id="cb88-1192"><a href="#cb88-1192" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb88-1193"><a href="#cb88-1193" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb88-1194"><a href="#cb88-1194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1195"><a href="#cb88-1195" aria-hidden="true" tabindex="-1"></a><span class="co"># Join demographic data to station errors</span></span>
-<span id="cb88-1196"><a href="#cb88-1196" aria-hidden="true" tabindex="-1"></a>station_errors_demo <span class="ot">&lt;-</span> station_errors <span class="sc">%&gt;%</span></span>
-<span id="cb88-1197"><a href="#cb88-1197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb88-1198"><a href="#cb88-1198" aria-hidden="true" tabindex="-1"></a>    station_attributes <span class="sc">%&gt;%</span> <span class="fu">select</span>(start_station, Med_Inc, Percent_Taking_Transit, Percent_White),</span>
-<span id="cb88-1199"><a href="#cb88-1199" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;start_station&quot;</span></span>
-<span id="cb88-1200"><a href="#cb88-1200" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb88-1201"><a href="#cb88-1201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Med_Inc))</span>
-<span id="cb88-1202"><a href="#cb88-1202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1203"><a href="#cb88-1203" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plots</span></span>
-<span id="cb88-1204"><a href="#cb88-1204" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(station_errors_demo, <span class="fu">aes</span>(<span class="at">x =</span> Med_Inc, <span class="at">y =</span> MAE)) <span class="sc">+</span></span>
-<span id="cb88-1205"><a href="#cb88-1205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1206"><a href="#cb88-1206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1207"><a href="#cb88-1207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>dollar) <span class="sc">+</span></span>
-<span id="cb88-1208"><a href="#cb88-1208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Errors vs. Median Income&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Median Income&quot;</span>, <span class="at">y =</span> <span class="st">&quot;MAE&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1209"><a href="#cb88-1209" aria-hidden="true" tabindex="-1"></a>  plotTheme</span>
-<span id="cb88-1210"><a href="#cb88-1210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1211"><a href="#cb88-1211" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(station_errors_demo, <span class="fu">aes</span>(<span class="at">x =</span> Percent_Taking_Transit, <span class="at">y =</span> MAE)) <span class="sc">+</span></span>
-<span id="cb88-1212"><a href="#cb88-1212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1213"><a href="#cb88-1213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1214"><a href="#cb88-1214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Errors vs. Transit Usage&quot;</span>, <span class="at">x =</span> <span class="st">&quot;% Taking Transit&quot;</span>, <span class="at">y =</span> <span class="st">&quot;MAE&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1215"><a href="#cb88-1215" aria-hidden="true" tabindex="-1"></a>  plotTheme</span>
-<span id="cb88-1216"><a href="#cb88-1216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1217"><a href="#cb88-1217" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(station_errors_demo, <span class="fu">aes</span>(<span class="at">x =</span> Percent_White, <span class="at">y =</span> MAE)) <span class="sc">+</span></span>
-<span id="cb88-1218"><a href="#cb88-1218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1219"><a href="#cb88-1219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1220"><a href="#cb88-1220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Errors vs. Race&quot;</span>, <span class="at">x =</span> <span class="st">&quot;% White&quot;</span>, <span class="at">y =</span> <span class="st">&quot;MAE&quot;</span>) <span class="sc">+</span></span>
-<span id="cb88-1221"><a href="#cb88-1221" aria-hidden="true" tabindex="-1"></a>  plotTheme</span>
-<span id="cb88-1222"><a href="#cb88-1222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1223"><a href="#cb88-1223" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2) <span class="sc">/</span> (p3 <span class="sc">|</span> <span class="fu">plot_spacer</span>())</span>
-<span id="cb88-1224"><a href="#cb88-1224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-1191"><a href="#cb88-1191" aria-hidden="true" tabindex="-1"></a><span class="co"># Join demographic data to station errors</span></span>
+<span id="cb88-1192"><a href="#cb88-1192" aria-hidden="true" tabindex="-1"></a>station_errors_demo <span class="ot">&lt;-</span> station_errors <span class="sc">%&gt;%</span></span>
+<span id="cb88-1193"><a href="#cb88-1193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb88-1194"><a href="#cb88-1194" aria-hidden="true" tabindex="-1"></a>    station_attributes <span class="sc">%&gt;%</span> <span class="fu">select</span>(start_station, Med_Inc, Percent_Taking_Transit, Percent_White),</span>
+<span id="cb88-1195"><a href="#cb88-1195" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;start_station&quot;</span></span>
+<span id="cb88-1196"><a href="#cb88-1196" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb88-1197"><a href="#cb88-1197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Med_Inc))</span>
+<span id="cb88-1198"><a href="#cb88-1198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1199"><a href="#cb88-1199" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plots</span></span>
+<span id="cb88-1200"><a href="#cb88-1200" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(station_errors_demo, <span class="fu">aes</span>(<span class="at">x =</span> Med_Inc, <span class="at">y =</span> MAE)) <span class="sc">+</span></span>
+<span id="cb88-1201"><a href="#cb88-1201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1202"><a href="#cb88-1202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1203"><a href="#cb88-1203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>dollar) <span class="sc">+</span></span>
+<span id="cb88-1204"><a href="#cb88-1204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Errors vs. Median Income&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Median Income&quot;</span>, <span class="at">y =</span> <span class="st">&quot;MAE&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1205"><a href="#cb88-1205" aria-hidden="true" tabindex="-1"></a>  plotTheme</span>
+<span id="cb88-1206"><a href="#cb88-1206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1207"><a href="#cb88-1207" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(station_errors_demo, <span class="fu">aes</span>(<span class="at">x =</span> Percent_Taking_Transit, <span class="at">y =</span> MAE)) <span class="sc">+</span></span>
+<span id="cb88-1208"><a href="#cb88-1208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1209"><a href="#cb88-1209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1210"><a href="#cb88-1210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Errors vs. Transit Usage&quot;</span>, <span class="at">x =</span> <span class="st">&quot;% Taking Transit&quot;</span>, <span class="at">y =</span> <span class="st">&quot;MAE&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1211"><a href="#cb88-1211" aria-hidden="true" tabindex="-1"></a>  plotTheme</span>
+<span id="cb88-1212"><a href="#cb88-1212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1213"><a href="#cb88-1213" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(station_errors_demo, <span class="fu">aes</span>(<span class="at">x =</span> Percent_White, <span class="at">y =</span> MAE)) <span class="sc">+</span></span>
+<span id="cb88-1214"><a href="#cb88-1214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#3182bd&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1215"><a href="#cb88-1215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1216"><a href="#cb88-1216" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Errors vs. Race&quot;</span>, <span class="at">x =</span> <span class="st">&quot;% White&quot;</span>, <span class="at">y =</span> <span class="st">&quot;MAE&quot;</span>) <span class="sc">+</span></span>
+<span id="cb88-1217"><a href="#cb88-1217" aria-hidden="true" tabindex="-1"></a>  plotTheme</span>
+<span id="cb88-1218"><a href="#cb88-1218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1219"><a href="#cb88-1219" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">|</span> p2) <span class="sc">/</span> (p3 <span class="sc">|</span> <span class="fu">plot_spacer</span>())</span>
+<span id="cb88-1220"><a href="#cb88-1220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb88-1221"><a href="#cb88-1221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1222"><a href="#cb88-1222" aria-hidden="true" tabindex="-1"></a><span class="fu">### Demographic Error Patterns and Equity Implications</span></span>
+<span id="cb88-1223"><a href="#cb88-1223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1224"><a href="#cb88-1224" aria-hidden="true" tabindex="-1"></a>Prediction errors show some relationship with neighborhood characteristics. Areas with higher median income and higher transit usage tend to exhibit greater prediction errors, likely reflecting more complex and variable mobility patterns.</span>
 <span id="cb88-1225"><a href="#cb88-1225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1226"><a href="#cb88-1226" aria-hidden="true" tabindex="-1"></a><span class="fu">### Demographic Error Patterns and Equity Implications</span></span>
+<span id="cb88-1226"><a href="#cb88-1226" aria-hidden="true" tabindex="-1"></a>This raises potential equity concerns. If prediction errors are systematically higher in certain neighborhoods, it could lead to unequal service quality, with some areas experiencing more frequent bike shortages or surpluses.</span>
 <span id="cb88-1227"><a href="#cb88-1227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1228"><a href="#cb88-1228" aria-hidden="true" tabindex="-1"></a>Prediction errors show some relationship with neighborhood characteristics. Areas with higher median income and higher transit usage tend to exhibit greater prediction errors, likely reflecting more complex and variable mobility patterns.</span>
+<span id="cb88-1228"><a href="#cb88-1228" aria-hidden="true" tabindex="-1"></a>From a policy perspective, deploying such a model without adjustments could reinforce existing disparities in access to shared mobility. Safeguards such as minimum service thresholds or targeted rebalancing strategies may be necessary to ensure equitable outcomes.</span>
 <span id="cb88-1229"><a href="#cb88-1229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1230"><a href="#cb88-1230" aria-hidden="true" tabindex="-1"></a>This raises potential equity concerns. If prediction errors are systematically higher in certain neighborhoods, it could lead to unequal service quality, with some areas experiencing more frequent bike shortages or surpluses.</span>
+<span id="cb88-1230"><a href="#cb88-1230" aria-hidden="true" tabindex="-1"></a><span class="fu">## Critical Reflection</span></span>
 <span id="cb88-1231"><a href="#cb88-1231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1232"><a href="#cb88-1232" aria-hidden="true" tabindex="-1"></a>From a policy perspective, deploying such a model without adjustments could reinforce existing disparities in access to shared mobility. Safeguards such as minimum service thresholds or targeted rebalancing strategies may be necessary to ensure equitable outcomes.</span>
+<span id="cb88-1232"><a href="#cb88-1232" aria-hidden="true" tabindex="-1"></a>From an operational perspective, the final model achieves a relatively low MAE, suggesting it could be useful for informing bike rebalancing strategies. However, prediction errors during peak demand periods remain a concern, as these are the times when accurate forecasts are most critical. Even small errors during rush hours could lead to significant service disruptions.</span>
 <span id="cb88-1233"><a href="#cb88-1233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1234"><a href="#cb88-1234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1235"><a href="#cb88-1235" aria-hidden="true" tabindex="-1"></a><span class="fu">## Critical Reflection</span></span>
-<span id="cb88-1236"><a href="#cb88-1236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1237"><a href="#cb88-1237" aria-hidden="true" tabindex="-1"></a>From an operational perspective, the final model achieves a relatively low MAE, suggesting it could be useful for informing bike rebalancing strategies. However, prediction errors during peak demand periods remain a concern, as these are the times when accurate forecasts are most critical. Even small errors during rush hours could lead to significant service disruptions.</span>
-<span id="cb88-1238"><a href="#cb88-1238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1239"><a href="#cb88-1239" aria-hidden="true" tabindex="-1"></a>From an equity standpoint, the presence of higher errors in certain neighborhoods raises concerns about uneven service provision. If the model is used to guide resource allocation, it could inadvertently disadvantage areas where predictions are less accurate. Ensuring equitable outcomes would require incorporating fairness considerations, such as prioritizing service reliability in underserved communities.</span>
-<span id="cb88-1240"><a href="#cb88-1240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1241"><a href="#cb88-1241" aria-hidden="true" tabindex="-1"></a>Finally, the model has several limitations. It does not account for special events, infrastructure differences, or behavioral factors that influence demand. Future improvements could include richer spatial data, event indicators, and more advanced modeling techniques to better capture these dynamics.</span>
-<span id="cb88-1242"><a href="#cb88-1242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1234"><a href="#cb88-1234" aria-hidden="true" tabindex="-1"></a>From an equity standpoint, the presence of higher errors in certain neighborhoods raises concerns about uneven service provision. If the model is used to guide resource allocation, it could inadvertently disadvantage areas where predictions are less accurate. Ensuring equitable outcomes would require incorporating fairness considerations, such as prioritizing service reliability in underserved communities.</span>
+<span id="cb88-1235"><a href="#cb88-1235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1236"><a href="#cb88-1236" aria-hidden="true" tabindex="-1"></a>Finally, the model has several limitations. It does not account for special events, infrastructure differences, or behavioral factors that influence demand. Future improvements could include richer spatial data, event indicators, and more advanced modeling techniques to better capture these dynamics.</span>
+<span id="cb88-1237"><a href="#cb88-1237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1238"><a href="#cb88-1238" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Limitations and Future Improvements</span></span>
+<span id="cb88-1239"><a href="#cb88-1239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1240"><a href="#cb88-1240" aria-hidden="true" tabindex="-1"></a>While the model performs well overall, it misses several important patterns. Most notably, it does not account for short-term demand shocks such as special events, holidays, or disruptions (e.g., concerts, sports games, or transit outages), which can significantly influence bike usage. It also does not capture differences in infrastructure, such as bike lane availability or station capacity, which may affect demand across locations.</span>
+<span id="cb88-1241"><a href="#cb88-1241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-1242"><a href="#cb88-1242" aria-hidden="true" tabindex="-1"></a>The model also relies on several assumptions that may not hold in real-world deployment. It assumes that relationships between predictors and demand remain stable over time, but in practice, travel behavior can shift due to seasonal changes, policy interventions, or broader mobility trends. Additionally, the model assumes that past demand is always a reliable predictor of future demand, which may break down during unusual conditions such as extreme weather or sudden demand spikes.</span>
 <span id="cb88-1243"><a href="#cb88-1243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1244"><a href="#cb88-1244" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Limitations and Future Improvements</span></span>
-<span id="cb88-1245"><a href="#cb88-1245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1246"><a href="#cb88-1246" aria-hidden="true" tabindex="-1"></a>While the model performs well overall, it misses several important patterns. Most notably, it does not account for short-term demand shocks such as special events, holidays, or disruptions (e.g., concerts, sports games, or transit outages), which can significantly influence bike usage. It also does not capture differences in infrastructure, such as bike lane availability or station capacity, which may affect demand across locations.</span>
-<span id="cb88-1247"><a href="#cb88-1247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1248"><a href="#cb88-1248" aria-hidden="true" tabindex="-1"></a>The model also relies on several assumptions that may not hold in real-world deployment. It assumes that relationships between predictors and demand remain stable over time, but in practice, travel behavior can shift due to seasonal changes, policy interventions, or broader mobility trends. Additionally, the model assumes that past demand is always a reliable predictor of future demand, which may break down during unusual conditions such as extreme weather or sudden demand spikes.</span>
-<span id="cb88-1249"><a href="#cb88-1249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-1250"><a href="#cb88-1250" aria-hidden="true" tabindex="-1"></a>With more time and data, the model could be improved in several ways. Incorporating event data, holiday indicators, and land-use or points-of-interest data would help capture spatial and temporal variability more accurately. More advanced modeling approaches, such as machine learning models or hierarchical models, could better account for non-linear relationships and station-level heterogeneity. Finally, integrating real-time data streams could improve responsiveness and make the model more useful for operational decision-making.</span>
+<span id="cb88-1244"><a href="#cb88-1244" aria-hidden="true" tabindex="-1"></a>With more time and data, the model could be improved in several ways. Incorporating event data, holiday indicators, and land-use or points-of-interest data would help capture spatial and temporal variability more accurately. More advanced modeling approaches, such as machine learning models or hierarchical models, could better account for non-linear relationships and station-level heterogeneity. Finally, integrating real-time data streams could improve responsiveness and make the model more useful for operational decision-making.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
